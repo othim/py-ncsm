@@ -7,7 +7,7 @@ SRCFORT_90_FILES := tbi-constants.f90 my_braket.f90
 OBJFORT_90_FILES := tbi-constants.o my_braket.o
 
 #On mac
-LDFLAGS := -lgfortran -L/usr/local/Cellar/gcc/12.2.0/lib/gcc/12/ -undefined dynamic_lookup
+LDFLAGS := -lgfortran -L/usr/local/Cellar/gcc/12.2.0/lib/gcc/12/ 
 # On linux
 #LDFLAGS := -lgfortran 
 

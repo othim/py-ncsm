@@ -24,7 +24,7 @@ import ctypes
 
 
 lib = ctypes.CDLL('./test.so')
-print(lib)
-lib.__angmom_lib_MOD_gmosh.argtypes = [ctypes.c_double,ctypes.c_double]
-lib.__angmom_lib_MOD_gmosh.restype = ctypes.c_double
-print(lib.__angmom_lib_MOD_gmosh(2.0,3.0))
+print(lib.gmosh)
+lib.gmosh.argtypes = [ctypes.c_double,ctypes.c_double]
+lib.gmosh.restype = ctypes.c_double
+print(lib.gmosh(ctypes.c_double(2.0),ctypes.c_double(5.0)))
