@@ -1,0 +1,14 @@
+name: py-ncsm-env
+channels:
+- conda-forge
+dependencies:
+- python
+- numpy
+- scipy
+- matplotlib
+- pandas
+- mkl-service
+- pip
+pip:
+- ctypes
+- pywigxjpf
