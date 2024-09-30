@@ -1,0 +1,7 @@
+The file my_braket.f90 contains the relevant code from the tbi-modules
+to call the function gmosh.
+
+Build and install the library by running '$ make f2py'. 
+
+You can test that the function is called correctly by running the 
+test script '$ python test_gmosh.py'.
