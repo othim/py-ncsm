@@ -921,3 +921,241 @@ CONTAINS
  
 END MODULE angmom_lib
 
+! HARMONIC OSCILLATOR BRACKETS CALCULATION PROGRAM 
+! Version 1.0: May 2001 
+! E-mail: Gintautas_Kamuntavicius@fc.vdu.lt
+! Reference: nucl-th/0105009
+! WWW: http://www.nuclear.physics.vdu.lt  
+!
+! F95 VERSION: andreas ekstrom
+!
+! CALL TMB(EE,LL,ER,LR,E1,L1,E2,L2,LM,D)
+!
+! EE-centre of mass energy, LL-centre of mass angular moment
+! ER-relative energy, LR-relative angular moment
+! E1-energy of the first particle, L1-angular moment of the first particle
+! E2-energy of the second particle, L2-angular moment of the second particle
+! LM-total angular moment   
+
+!Output: TMB-HARMONIC OSCILLATOR BRACKET!
+MODULE tmb_brackets
+
+  USE angmom_lib
+  USE constants
+
+  IMPLICIT NONE
+  
+  REAL(DP) :: BIN(0:99,0:99)
+  REAL(DP) :: TIN(0:99,0:99,0:99)
+  REAL(DP) :: T1, skirtm
+  
+CONTAINS
+  
+  SUBROUTINE INITIALIZE_TMB_BRACKETS
+    CALL BINOM_TMB
+    CALL TRINOM
+  END SUBROUTINE INITIALIZE_TMB_BRACKETS
+  
+  FUNCTION TRI(I,J,K) RESULT(RES)
+    !     TRIADIC CONDITION FOR MOMENTS I/2,J/2,K/2:
+    !     I+J>=K, I+K>=J, J+K>=I,
+    !     I/2+J/2+K/2 = INTEGER.
+    !     TRI=1, WHEN TRIADIC CONDITION IS FULFILLED, TRI=0 OTHERWISE	 
+    IMPLICIT NONE
+    INTEGER :: I,J,K,L, RES
+    RES=0
+    L=I+J+K
+    IF(L/2*2.NE.L) RETURN
+    L=L/2
+    IF((L-I)*(L-J)*(L-K).LT.0) RETURN
+    RES=1
+    
+  END FUNCTION TRI
+
+  FUNCTION GG(E1,L1,EA,LA,EB,LB) RESULT(RES)
+    IMPLICIT NONE
+    REAL(DP) RES
+    INTEGER E1,L1,EA,LA,EB,LB
+    
+    RES=KL0(LA,LB,L1)*DSQRT(DFLOAT((2*LA+1)*(2*LB+1))*&
+         TIN(E1-L1,EA-LA,EB-LB)*TIN(E1+L1+1,EA+LA+1,EB+LB+1))
+  END FUNCTION GG
+  
+  FUNCTION C6J(I,J,K,L,M,N) RESULT(RES)
+    !     6J - COEFFICIENT
+    !     ( I/2  J/2  K/2 )
+    !     ( L/2  M/2  N/2 ) 
+    !     [JB 65] (22.1.4)
+    IMPLICIT NONE
+    INTEGER :: I,J,K,L,M,N,I1,I2,I3,I4,I5,IZ,JZ,KZ
+    REAL(DP)  :: T,DZ,RES
+    
+    RES = 0.D0
+    IF(TRI(I,J,K)*TRI(I,M,N)*TRI(J,L,N)*TRI(K,L,M).EQ.0) RETURN
+    I1=(I+J+K)/2
+    I2=(I+M+N)/2
+    I3=(J+L+N)/2
+    I4=(K+L+M)/2
+    I5=(I+K+L+N)/2
+    T=DSQRT(DFLOAT((I1+1)*(I4+1))/DFLOAT((I2+1)*(I3+1))* & 
+         BIN(I2,I)*BIN(I,I2-N)*BIN(I4,L)/ & 
+         BIN(I3,N)*BIN(L,I4-K)*BIN(I1,K)*BIN(K,I1-J)/&
+         BIN(N,I3-L))/DFLOAT(I2-N+1)
+    JZ=MAX0(0,(I+L-J-M)/2)
+    DZ=1.D0
+    IF((JZ+I5)/2*2.NE.(JZ+I5)) DZ=-1.D0
+    KZ=MIN0(I2-M,I3-J,I5-K)
+    DO IZ=JZ,KZ
+       RES=RES+DZ*T*BIN(I2-M,IZ)/BIN(I2,I5-K-IZ)*&
+            BIN(I2-I,I3-J-IZ)/BIN(I4-I3+J+IZ+1,I2-N+1)
+       DZ=-DZ
+    END DO
+  
+  END FUNCTION C6J
+  
+  FUNCTION C9J(J1,J2,J3,L1,L2,L3,K1,K2,K3) RESULT(RES)
+    !     9J COEFICIENT
+    !     (J1/2 J2/2 J3/2)
+    !     (L1/2 L2/2 L3/2)
+    !	(K1/2 K2/2 K3/2)  	 
+    !     [JB 65] (24.33)
+    USE angmom_lib
+    
+    IMPLICIT NONE
+    REAL(DP)  :: RES
+    INTEGER :: J1,J2,J3,L1,L2,L3,K1,K2,K3,I,J,K,L
+    RES=0.D0
+    L=TRI(J1,J2,J3)*TRI(L1,L2,L3)*TRI(K1,K2,K3)*&
+         TRI(J1,L1,K1)*TRI(J2,L2,K2)*TRI(J3,L3,K3)
+    IF(L.EQ.0) RETURN
+    J=MAX0(IABS(J1-K3),IABS(J2-L3),IABS(L1-K2))
+    K=MIN0(J1+K3,J2+L3,L1+K2)
+    DO I=J,K,2
+       RES=RES+DFLOAT(I+1)*C6J(J1,J2,J3,L3,K3,I)*&
+            C6J(L1,L2,L3,J2,I,K2)*C6J(K1,K2,K3,I,J1,L1)
+    END DO
+    IF(J/2*2.NE.J) RES=-RES
+    RETURN
+  END FUNCTION C9J
+  
+  FUNCTION KL0(I,J,K) RESULT(RES)
+    !	KLEBS-GORDAN COEFFICIENT WITH ZERO PROJECTIONS OF MOMENTA
+    !	(I, J, K)
+    !	(0, 0, 0)  
+    !	I,J,K - MOMENTA = INTEGER NUMBERS
+    !	[JB,65] (15.10)
+    IMPLICIT NONE
+    REAL(DP)  :: T, RES
+    INTEGER :: I,J,K,L,M
+    
+    RES=0.D0
+    IF(TRI(I,J,K).EQ.0) RETURN
+    L=(I+J+K)/2
+    M=L-K
+    T=1.D0
+    IF(M/2*2.NE.M) T=-1.D0
+    RES=T*BIN(K,L-J)*BIN(L,K)/&
+         DSQRT(BIN(2*K,2*(L-J))*BIN(2*L+1,2*K+1))
+  
+  END FUNCTION KL0
+  
+  ! Modified by Andreas:
+  ! included (-)*(NN+NR+N1+N2) to comply with our
+  ! definition of the radial wave function.
+  ! DONT use the C9J function
+  ! ninej in angmom_lib has superior
+  ! precision, at the cost of a factor 
+  ! of two in speed.... 
+
+  FUNCTION TMB(EE,LL,ER,LR,E1,L1,E2,L2,LM,D) RESULT(RES)
+    
+    !     	   TALMI-MOSHINSKY BRACKET
+    !	    (EE,LL;ER,LR:LM/E1,L1;E2,L2:LM)D
+    IMPLICIT NONE
+    REAL(DP) :: S,D,T,RES,PHASE
+    INTEGER :: EE,LL,ER,LR,E1,L1,E2,L2,LM
+    INTEGER :: M,ED,LD,EB,LB,EC,LC,EA,LA
+    INTEGER :: NN, NR, N1, N2
+
+    RES=0.D0
+    IF(EE+ER.NE.E1+E2) RETURN
+    IF(TRI(2*LL,2*LR,2*LM)*TRI(2*L1,2*L2,2*LM).EQ.0) RETURN
+    T=DSQRT((D**(E1-ER))/((1.D0+D)**(E1+E2)))
+    M=MIN0(ER,E2)
+    S=1.D0
+    DO ED=0,M
+       EB=ER-ED
+       EC=E2-ED
+       EA=E1-ER+ED
+       DO LD=ED,0,-2 
+          DO LB=EB,0,-2
+             IF(TRI(LD,LB,LR).EQ.0) CYCLE
+             DO LC=EC,0,-2
+                IF(TRI(LD,LC,L2).EQ.0) CYCLE
+                DO LA=EA,0,-2
+                   IF((TRI(LA,LB,L1).EQ.0).OR.(TRI(LA,LL,LC).EQ.0)) CYCLE
+                   RES=RES+S*T* &
+                        ninej(2*LA,2*LB,2*L1,2*LC,2*LD,2*L2,2*LL,2*LR,2*LM)* &
+                        GG(E1,L1,EA,LA,EB,LB)*GG(E2,L2,EC,LC,ED,LD)* &
+                        GG(EE,LL,EA,LA,EC,LC)*GG(ER,LR,EB,LB,ED,LD)
+                END DO
+             END DO
+          END DO
+       END DO
+       S=S*(-D)
+    END DO
+
+    NN = (EE-LL)/2
+    NR = (ER-LR)/2
+    N1 = (E1-L1)/2
+    N2 = (E2-L2)/2
+    PHASE = (-1.0_dp)**(NN+NR+N1+N2)
+    RES = RES*PHASE
+
+    RETURN
+  END FUNCTION TMB
+
+  SUBROUTINE BINOM_TMB
+    !	THE ARRAY OF BINOMIAL COEFFICIENTS
+    !     BIN(I,J)= = I!/J!/(I-J)! 
+    IMPLICIT NONE
+    
+    INTEGER :: I,K
+    
+    DO I=0,99
+       BIN(I,0)=1.D0
+       BIN(I,I)=1.D0
+       DO K=1,I/2
+          BIN(I,K)=DNINT(BIN(I,K-1)/DFLOAT(K)*DFLOAT(I-K+1))
+          BIN(I,I-K)=BIN(I,K)
+       END DO
+    END DO
+    RETURN
+  END SUBROUTINE BINOM_TMB
+  
+  SUBROUTINE TRINOM
+    !	THE ARRAY OF TRINOMIAL COEFFICIENTS
+    !	TIN(I,J,K)=I!!/J!!/K!!
+    IMPLICIT NONE
+    
+    INTEGER :: I,J,K,M,N
+    TIN(0,0,0)=1.D0
+    TIN(1,1,1)=1.D0
+    DO I=2,99
+       M=I-I/2*2
+       TIN(I,I,M)=1.D0
+       TIN(I,M,I)=1.D0
+       N=M+2
+       DO J=I,N,-2
+          DO K=N,J,2
+             TIN(I,J,K)=TIN(I,J,K-2)/DFLOAT(K)
+             TIN(I,K,J)=TIN(I,J,K)
+          END DO
+          TIN(I,J-2,M)=TIN(I,J,M)*DFLOAT(J)
+          TIN(I,M,J-2)=TIN(I,J-2,M)
+       END DO
+    END DO
+    RETURN
+  END SUBROUTINE TRINOM
+  
+END MODULE tmb_brackets
