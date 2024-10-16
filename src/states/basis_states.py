@@ -116,21 +116,27 @@ def NNN_basis_nl(N_max, verbose=False):
         dictionary(n,l,s,j,t,mt,cN,cL,cJ2,J2,T2,N)
     '''
     basis = []
-    for n in range(0,int(N_max/2)+1,1):
-        for l in range(0,N_max-2*n+1,1):
-            for s in range(0,2,1):
-                for t in range(0,2,1):
+    for n in range(0,int(N_max/2)+1,1):  # n = 0,...,int(Nmax/2)
+        for l in range(0,N_max-2*n+1,1): # l = 0,...,Nmax-2*n
+            for s in range(0,2,1):       # s = 0,1
+                for t in range(0,2,1):   # t = 0,1
                     if ((l+s+t)%2 != 0): # continue only for antisym 2N
                         
-                        for j in range(abs(l-s),l+s+1,1):
+                        for j in range(abs(l-s),l+s+1,1): # j=|l-s|,...,|l+s|
+                            # cN = 0,...,int((Nmax-2n-l)/2)
                             for cN in range(0,int((N_max-2*n-l)/2)+1,1):
+                                # cL = 0,...,int(Nmax-2n-l-2*cN)
                                 for cL in range(0,N_max-2*n-l-2*cN+1,1):
 
                                     # The two means that this is two times
                                     # the quantum number. This is more convenient
                                     # since these can be half integers.
+
+                                    # cJ2 = |2*cL-1|,...,|2*cL+1|
                                     for cJ2 in range(abs(2*cL-1),2*cL+2,2):
+                                        # J2 = |2*j-cJ2|,...,|2*j+cJ2|
                                         for J2 in range(abs(2*j-cJ2),2*j+cJ2+1,2):
+                                            # T2 = |2*t-1|,...,|2*t+1|
                                             for T2 in range(abs(2*t-1),2*t+2,2):
                                                 basis_state = {}
                                                 basis_state['n']   = int(n)
@@ -180,8 +186,10 @@ def group_NNN_basis_nl(grouper, basis, verbose=False):
     '''
 
     grouped_basis = []
+    key_list = []
     for key, grp in groupby(sorted(basis, key = grouper), grouper):
         grouped_basis.append(list(grp))
+        key_list.append(key)
 
     if verbose:
         for chn_idx, chn in enumerate(grouped_basis):
@@ -189,7 +197,25 @@ def group_NNN_basis_nl(grouper, basis, verbose=False):
             for state in chn:
                 print(state)
             print('')
-    return grouped_basis
+    return grouped_basis,key_list
+
+def NNN_basis_nl_check_equal(list1,list2, verbose=False):
+    ''' 
+        Check if two lists of thates contains the same states
+    '''
+
+        # Sort both lists of dictionaries for comparison
+    sorted_list1 = sorted(list1, key=lambda x: tuple(sorted(x.items())))
+    sorted_list2 = sorted(list2, key=lambda x: tuple(sorted(x.items())))
+
+    # Compare the sorted lists
+    return sorted_list1 == sorted_list2
+
+##    states_A = copy(
+#   for i,sA in enumerate(states_A):
+#        for j, sB in enumerate(states_B):
+#            if (sA == sB):
+
 
 
 # If you run only this file you can check some functions
@@ -200,7 +226,7 @@ if __name__ == "__main__":
     print(f'NN_basis_j: {(end-start)*1e3:.4f} ms')
     
     start = time.time()
-    Nmax = 2
+    Nmax = 30
     NNStates = NNN_basis_nl(Nmax,True)
     end = time.time()
     print(f'NN_basis_nl, Nmax={Nmax}, time={(end-start)*1e3:.4f} ms')
