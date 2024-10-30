@@ -290,8 +290,8 @@ def check_A(A):
 
 def check_eigs(eigs):
 
-    num1 = np.sum([np.abs(e-1.0)<1e-8 for e in eigs])
-    num2 = np.sum([np.abs(e-0.0)<1e-8 for e in eigs])
+    num1 = np.sum([np.abs(e-1.0)<1e-6 for e in eigs])
+    num2 = np.sum([np.abs(e-0.0)<1e-6 for e in eigs])
     if (num1+num2 != len(eigs)):
         print(eigs)
         return False

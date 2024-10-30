@@ -23,37 +23,41 @@ def psi_nlm(n,l,m,r,theta,phi):
     return 0
 
 
-def NN_basis_j(j_min, j_max, mt_min, mt_max):
+def NN_basis_nl(N_max, verbose=False):
     '''
-        Computes allowed antisymmetrized 2N basis states
-        and returns a list of dictionaries containig the basis states.
+        Computes 2N basis states which are antisymmetrized
+        i.e. (-1)^{l+s+t} = -1. 
+
+        n,l,s,j,t       : quantum numbers for NN system
     Args:
-        j_min  : Minimum total angular momentum, (ls)j.
-        j_max  : Maximum total angular momentum, (ls)j.
-        mt_min : Minimum isospin projection 
-        mt_max : Maximum isospin projection
+        N_max (int)             : Maximum HO energy, N = 2n+l + 2*cN+cL (cN = \mathcal{N})
     Returns:
-        list(basis_states)
-        basis_states : dictionary(l,s,j,t,mt,pi) (pi=parity)
+        basis (list) : list of 'basis_states (dictionary)' that contains keys : 
+        dictionary(n,l,s,j,t)
     '''
     basis = []
-    for mt in range(mt_min,mt_max+1,1):
-        for J in range(j_min,j_max+1,1):
-            for S in range(0,2):
-                for L in range(abs(J-S),J+S+1,1):
-                    for T in range(abs(mt),2,1):
-                        if ((L+S+T)%2 != 0):
+    for n in range(0,int(N_max/2)+1,1):  # n = 0,...,int(Nmax/2)
+        for l in range(0,N_max-2*n+1,1): # l = 0,...,Nmax-2*n
+            for s in range(0,2,1):       # s = 0,1
+                for t in range(0,2,1):   # t = 0,1
+                    if ((l+s+t)%2 != 0): # continue only for antisym 2N
+                        
+                        for j in range(abs(l-s),l+s+1,1): # j=|l-s|,...,|l+s|
                             basis_state = {}
-                            basis_state['l']  = L
-                            basis_state['s']  = S
-                            basis_state['j']  = J
-                            basis_state['t']  = T
-                            basis_state['mt'] = mt
-                            basis_state['pi'] = (-1)**L
-                            print(basis_state)
+                            basis_state['n']   = int(n)
+                            basis_state['l']   = int(l)
+                            basis_state['s']   = int(s)
+                            basis_state['j']   = int(j)
+                            basis_state['t']   = int(t)
+                            basis_state['pi']  = int((-1)**l)
+                            
                             basis.append(basis_state)
 
-    print('len(basis) = ',len(basis))
+
+    if verbose:
+        for i,b in enumerate(basis):
+            print(b)
+        print('len(basis) = ',len(basis))
     return basis
 
 def triag(L, S, J):
@@ -113,7 +117,7 @@ def NNN_basis_nl(N_max, verbose=False):
         N_max (int)             : Maximum HO energy, N = 2n+l + 2*cN+cL (cN = \mathcal{N})
     Returns:
         basis (list) : list of 'basis_states (dictionary)' that contains keys : 
-        dictionary(n,l,s,j,t,mt,cN,cL,cJ2,J2,T2,N)
+        dictionary(n,l,s,j,t,cN,cL,cJ2,J2,T2,N)
     '''
     basis = []
     for n in range(0,int(N_max/2)+1,1):  # n = 0,...,int(Nmax/2)
