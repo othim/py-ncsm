@@ -5,8 +5,8 @@ dependencies:
 - python
 - numpy
 - scipy
-- matplotlib
-- pandas
+- ConfigParser
+- gitpython
 - mkl-service
 - pip
 pip:

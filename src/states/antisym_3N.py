@@ -6,6 +6,8 @@
     in the partially antisymmetric 3N basis to construct a fully antisymmetric
     basis 3N basis.
 
+    This file requires the module f2py-created module 'gmosh'. 
+
     Oliver Thim (2024)
 '''
 import numpy as np

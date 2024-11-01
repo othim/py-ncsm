@@ -170,11 +170,6 @@ def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict):
     fac = 1
     el = fac*get_two_body_HO_potential_el(bra['n'],bra['l'],ket['n'],ket['l']
             ,bra['s'],bra['j'],bra['t'],pot_dict)
-    #el = fac*get_two_body_HO_potential_el(bra['n'],ket['l'],ket['n'],bra['l']
-    #       ,bra['s'],bra['j'],bra['t'],pot_dict)
-    #print(f'bra={bra}')
-    #print(f'ket={ket}')
-    #print(f'el={el}\n')
     return el
 
 
@@ -206,12 +201,11 @@ def setup_H_Gamma_basis(Gamma_to_alpha_matrix,alpha_basis_list,Gamma_basis_list,
     V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict)
     #V_alpha_basis = get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega,mN)
     V_Gamma_basis = 3*alpha_to_Gamma_basis(Gamma_to_alpha_matrix,V_alpha_basis)
-    print(f'V_alpha={V_alpha_basis}')
-    print(f'T_alpha={T_alpha_basis}')
-    print(f'T_gamma={T_Gamma_basis}')
-    print(f'Gtoa={Gamma_to_alpha_matrix}')
+    #print(f'V_alpha={V_alpha_basis}')
+    #print(f'T_alpha={T_alpha_basis}')
+    #print(f'T_gamma={T_Gamma_basis}')
+    #print(f'Gtoa={Gamma_to_alpha_matrix}')
     return T_Gamma_basis + V_Gamma_basis
-    #return V_Gamma_basis
 
 def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict):
     
@@ -219,43 +213,8 @@ def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict):
     T_alpha_basis = get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN)
     
     # Compute potential operator
-    #V_alpha_basis = get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega,mN)
     V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict)
-    print(f'V_alpha={V_alpha_basis}')
-    print(f'T_alpha={T_alpha_basis}')
     return T_alpha_basis + V_alpha_basis
-    #return V_alpha_basis
-
-def remove_duplicates(list_dict):
-    
-    new_list = []
-    new_list.append(list_dict[0])
-    for d in list_dict:
-        if not any(d == nd for nd in new_list):
-            new_list.append(d)
-    return new_list
-
-def copy_list_dict(list_dict):
-    cpy_list = []
-    for li in list_dict:
-        d2 = copy.deepcopy(li)
-        cpy_list.append(d2)
-    return cpy_list
-
-def create_2N_alpha_basis(alpha_basis_list):
-    
-    alpha_2N = copy_list_dict(alpha_basis_list)
-    for d in alpha_2N:
-        d.pop('cL')
-        d.pop('cJ2')
-        d.pop('T2')
-        d.pop('J2')
-        d.pop('pi')
-        d.pop('N')
-        d.pop('cN')
-     
-    return remove_duplicates(alpha_2N)
-
 
 if __name__=="__main__":
     # Set varibles

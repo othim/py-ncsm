@@ -6,4 +6,7 @@
 
 .DS_Store
 
-*/__pycache__/*
+src/states/__pycache__/*
+src/states/Nmax=*/
+
+interactions/
