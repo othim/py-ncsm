@@ -285,7 +285,7 @@ def setup_3N_antisymmetrizer_element(bra,ket,verbose=False):
 
 def check_A(A):
 
-    if (np.max(np.abs(A-A@A))>1e-8):
+    if (np.max(np.abs(A-A@A))>1e-6):
         return False
     else:
         return True

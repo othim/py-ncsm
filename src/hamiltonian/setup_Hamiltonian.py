@@ -127,20 +127,27 @@ def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN):
 
 
 
-def get_two_body_HO_potential_el(n,l,n_p,l_p,s,j,t,pot_dict):
+def get_two_body_HO_potential_el(n,l,n_p,l_p,s,j,t,pot_dict,isospin_sym):
     el = 0
-    if (t==0):
-        m_t = 0
-        key = (n,l,n_p,l_p,s,j,m_t)
-        el = pot_dict[key]
+    if isospin_sym:
+        # NOTE: This implementation is specifically for triton
+        if (t==0):
+            m_t = 0
+            # np element
+            key = (n,l,n_p,l_p,s,j,m_t)
+            el = pot_dict[key]
+        else:
+            # Isospin average of nn and np
+            key1 = (n,l,n_p,l_p,s,j,0)
+            el += pot_dict[key1]*(1.0/3.0)
+            key2 = (n,l,n_p,l_p,s,j,1)
+            el += pot_dict[key2]*(2.0/3.0)
     else:
-        key1 = (n,l,n_p,l_p,s,j,0)
-        el += pot_dict[key1]*(1.0/3.0)
-        key2 = (n,l,n_p,l_p,s,j,1)
-        el += pot_dict[key2]*(2.0/3.0)
+        print('Error, isospin_sym = False not implemented, terminating the program.')
+        sys.exit()
     return el
 
-def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict):
+def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
     
     if 'N' in bra:
         # Check delta function over 3N variables, otherwise stop program
@@ -169,7 +176,7 @@ def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict):
     #fac = (-1)**(+bra['n']+ket['n'])
     fac = 1
     el = fac*get_two_body_HO_potential_el(bra['n'],bra['l'],ket['n'],ket['l']
-            ,bra['s'],bra['j'],bra['t'],pot_dict)
+            ,bra['s'],bra['j'],bra['t'],pot_dict,isospin_sym)
     return el
 
 
@@ -191,14 +198,14 @@ def alpha_to_Gamma_basis(Gamma_to_alpha_matrix,M_alpha_basis):
     
 
 def setup_H_Gamma_basis(Gamma_to_alpha_matrix,alpha_basis_list,Gamma_basis_list,\
-        Omega,mN,pot_dict):
+        Omega,mN,pot_dict,isospin_sym):
     
     # Compute kinetic energy operator
     T_alpha_basis = 3*get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN)
     T_Gamma_basis = alpha_to_Gamma_basis(Gamma_to_alpha_matrix,T_alpha_basis)
     
     # Compute potential operator
-    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict)
+    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym)
     #V_alpha_basis = get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega,mN)
     V_Gamma_basis = 3*alpha_to_Gamma_basis(Gamma_to_alpha_matrix,V_alpha_basis)
     #print(f'V_alpha={V_alpha_basis}')

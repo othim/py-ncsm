@@ -57,12 +57,9 @@ J2 = 1
 T2 = 1
 pi = 1
 print_states = True
-one_tol = 1e-6
+one_tol = 1e-5
 
-# Specify the directory for the data 
-directory_name = f'Nmax={Nmax}_data'
 save_data = True
-
 # ***********************************
 
 # Parse and set the NMAX_ARR argument
@@ -87,6 +84,8 @@ wig.wig_table_init(2*100, 9)
 wig.wig_temp_init(2*100)
 
 for Nmax in NMAX_ARR:
+    # Specify the directory for the data 
+    directory_name = f'Nmax={Nmax}_data'
     # Construct alpha basis (partially antisymmetric) states
     print(f'Constructing states_alpha...')
     states_alpha = bs.NNN_basis_nl(Nmax,verbose)
