@@ -214,13 +214,14 @@ def setup_H_Gamma_basis(Gamma_to_alpha_matrix,alpha_basis_list,Gamma_basis_list,
     #print(f'Gtoa={Gamma_to_alpha_matrix}')
     return T_Gamma_basis + V_Gamma_basis
 
-def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict):
+def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym):
     
     # Compute kinetic energy operator
     T_alpha_basis = get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN)
     
     # Compute potential operator
-    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict)
+    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,\
+            isospin_sym)
     return T_alpha_basis + V_alpha_basis
 
 if __name__=="__main__":

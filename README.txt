@@ -2,9 +2,12 @@
 
 py-ncsm is is a simple NCSM code for solving the A=3 nucleon system written
 in python. The code is not optimized or very fast, but istead written in a 
-simple and understandable manner for ease of use.
+simple and understandable manner for ease of use. 
 
-<License>
+In the directory 'deuteron/' there is also a script to solve for the deuteron 
+binding energy in a harmonic oscillator basis.
+
+License: See LICENSE.txt file.
 
 Written by: 
 Oliver Thim,
