@@ -25,12 +25,20 @@ import setup_Hamiltonian as sh
 # *****************************************************************************
 # ************************** DEFINE DEFAULT ARGUMENTS *************************
 # *****************************************************************************
+def print_git_version():
+    # Find the hash for the version of this repo
+    repo = git.Repo(search_parent_directories=True)
+    sha = repo.head.object.hexsha
+    print("*******************************************************************************")
+    print(f'***** Running py-ncsm. Version: {sha} ******')
+    print("*******************************************************************************\n")
+
+
 def get_default_args():
     '''
         This function returns a set of default arguments
         in case no infile is provided.
     '''
-    print(f'input_file=none, reading default arguments\n')
     args = {}
     args['nmax_arr']         = [0,2,4,6,8]
     args['hbar_omega']       = 24
@@ -40,7 +48,6 @@ def get_default_args():
     return args
 
 def get_args_from_infile(file):
-    print(f'input_file = {file}\n')
     config.read(file)
     args = dict(config.items('settings'))
     args['nmax_arr'] = json.loads(args['nmax_arr']) # Convert to dictionary
@@ -54,23 +61,17 @@ def get_args_from_infile(file):
 # *****************************************************************************
 # *****************************************************************************
 
-# Find the hash for the version of this repo
-repo = git.Repo(search_parent_directories=True)
-sha = repo.head.object.hexsha
-print("*******************************************************************************")
-print(f'***** Running py-ncsm. Version: {sha} ******')
-print("*******************************************************************************\n")
-print("-------------------------------------------------------------------------------")
-print("                              *** PARAMETERS ***")
-print("-------------------------------------------------------------------------------")
+print_git_version()
 
 # *****************************************************************************
 # ******************************* READ ARGUMENTS ******************************
 # *****************************************************************************
 config = configparser.ConfigParser(inline_comment_prefixes="#")
 
+DEFAULT = False
 if len(sys.argv)<2:
     args = get_default_args()
+    DEFAULT = True
 else:
     args = get_args_from_infile(sys.argv[1])
 
@@ -79,6 +80,16 @@ if args['output_file']!='none':
     print(f'Writing output to file: {args["output_file"]}')
     original = sys.stdout
     sys.stdout = open(args['output_file'], 'a')
+    print_git_version()
+
+print("-------------------------------------------------------------------------------")
+print("                              *** PARAMETERS ***")
+print("-------------------------------------------------------------------------------")
+
+if DEFAULT:
+    print(f'input_file=none, reading default arguments\n')
+else:
+    print(f'input_file = {sys.argv[1]}\n')
 
 mN = 0
 print('---------------------')
@@ -88,9 +99,6 @@ for key,val in args.items():
     print(f'{key:<16} = {val}')
 print("\n\n")
 
-
-    
-    
 
 print("-------------------------------------------------------------------------------")
 print("                             *** INFO FROM RUN ***")

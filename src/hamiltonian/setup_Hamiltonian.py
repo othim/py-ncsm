@@ -181,13 +181,13 @@ def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
 
 
 
-def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict):
+def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym):
     
     # Setup empty matrix
     V_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
     for i,bra in enumerate(alpha_basis_list):
         for j,ket in enumerate(alpha_basis_list):
-            el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict)
+            el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
             V_matrix[i,j] = el
 
     return V_matrix
