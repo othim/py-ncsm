@@ -1,0 +1,7 @@
+[settings]
+nmax_arr         = [0,10,20,30,40] # Array of different Nmax values to run with
+hbar_omega       = 24    # hbar_omega in MeV. NOTE this should correspond to 
+                         # the value in the interaction file
+isospin_sym      = True
+interaction_file = interactions/idaho_n3lo_nmax_40_hw_24.txt
+output_file      = tmp/out.txt

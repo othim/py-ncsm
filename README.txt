@@ -21,7 +21,7 @@ v1.0 Autum 2024
 
   isospin_sym = True
 
-  If this is this is set to false, the code will terminate since that is 
+  If isospin_sym is this is set to false, the code will terminate since that is 
   not implemented.
 
 ## External dependencies:

@@ -1,0 +1,67 @@
+*******************************************************************************
+***** Running py-ncsm. Version: 4c578354cfd149826bb4fdcf47a1e05d4c53eb89 ******
+*******************************************************************************
+
+-------------------------------------------------------------------------------
+                              *** PARAMETERS ***
+-------------------------------------------------------------------------------
+input_file = example-inout-files/in_small.txt
+
+---------------------
+        args
+---------------------
+nmax_arr         = [0, 2, 4]
+hbar_omega       = 24
+isospin_sym      = True
+interaction_file = interactions/idaho_n3lo_nmax_40_hw_24.txt
+output_file      = example-inout-files/out_small.txt
+
+
+
+-------------------------------------------------------------------------------
+                             *** INFO FROM RUN ***
+-------------------------------------------------------------------------------
+Reading states from 'src/states/Nmax=0_data'... Done!
+Gammta_to_alpha.shape=(2, 1)
+len(Gamma_states)=1
+len(alpha_states)=2
+
+Loading potential matrix elements... Done!
+Setting up Hamiltonian... shape=(1, 1). Done! Time=0 ms
+Diagonalizing Hamiltonian... Done! Time=0.107 ms
+E=12.165 MeV
+----------------------------------
+
+
+Reading states from 'src/states/Nmax=2_data'... Done!
+Gammta_to_alpha.shape=(14, 5)
+len(Gamma_states)=5
+len(alpha_states)=14
+
+Loading potential matrix elements... Done!
+Setting up Hamiltonian... shape=(5, 5). Done! Time=1 ms
+Diagonalizing Hamiltonian... Done! Time=0.188 ms
+E=4.880 MeV
+----------------------------------
+
+
+Reading states from 'src/states/Nmax=4_data'... Done!
+Gammta_to_alpha.shape=(44, 15)
+len(Gamma_states)=15
+len(alpha_states)=44
+
+Loading potential matrix elements... Done!
+Setting up Hamiltonian... shape=(15, 15). Done! Time=3 ms
+Diagonalizing Hamiltonian... Done! Time=0.153 ms
+E=1.821 MeV
+----------------------------------
+
+
+
+-------------------------------------------------------------------------------
+                                *** OUTPUT ***
+-------------------------------------------------------------------------------
+Nmax 	 E 	  dim (Gamma) 	 dim (alpha)
+0        12.165   1        	 2       
+2        4.880    5        	 14      
+4        1.821    15       	 44      

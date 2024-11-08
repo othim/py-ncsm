@@ -1,0 +1,24 @@
+3H
+Idaho-N3LO, hw=24.0 (isoscalar approx)
+Nmax  E      Method  dim
+40   -7.852  lancz   4263
+38   -7.852  lancz   3689
+36   -7.852  lancz   3169
+34   -7.851  lancz   2700
+32   -7.850  lancz   2280
+30   -7.849  lancz   1906
+28   -7.847  lancz   1575
+26   -7.840  lancz   1285
+24   -7.834  lancz   1033
+22   -7.808  lancz    816
+20   -7.773  lancz    632
+18   -7.667  lancz    478
+16   -7.442  lancz    351
+14   -6.998  lancz    249
+12   -6.126  lancz    169
+10   -5.053  lancz    108
+ 8   -3.111  exact     64
+ 6   -1.530  exact     34
+ 4    1.821  exact     15
+ 2    4.880  exact      5
+ 0   12.165  exact      1

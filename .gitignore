@@ -9,4 +9,6 @@
 src/states/__pycache__/*
 src/states/Nmax=*/
 
+src/hamiltonian/__pycache__/
+
 interactions/
