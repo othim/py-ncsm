@@ -68,10 +68,14 @@ v1.0 Autum 2024
 
   $ python run-py-nscm.py example_input_file_1.txt
 
-  ------------------------ example_input_file_1.txt ---------------------------
-
-
-  -----------------------------------------------------------------------------
+  ----------------------------- input_file.txt --------------------------------
+  [settings]
+  nmax_arr         = [0,2,4]
+  hbar_omega       = 24    # hbar_omega in MeV.
+  isospin_sym      = True
+  interaction_file = interactions/idaho_n3lo_nmax_40_hw_24.txt
+  output_file      = example-inout-files/out_small.txt
+  ------------------------- END input_file.txt --------------------------------
 
 
   This will generate the corresponding output file <outdir>/<out_file_name>
@@ -82,13 +86,17 @@ v1.0 Autum 2024
   <version_of_this_code>
   infile=<input_file_name>
   <copy_of_input_parameters>
-
   <run_information_from_the_code>
   
-                                 *** OUTPUT ***
-  -----------------------------------------------------------------------------
-  <output_data>
-  -----------------------------------------------------------------------------
+  -------------------------------------------------------------------------------
+                                  *** OUTPUT ***
+  -------------------------------------------------------------------------------
+  Nmax     E 	 	  dim (Gamma) dim (alpha)
+  0        12.16523   1        	  2       
+  2        4.88032    5        	  14      
+  4        1.82073    15       	  44      
+
+  ------------------------- END output_file.txt -------------------------------
 
 - To benchmark the code, you can verify that the output of the code is the same
   and the corresponing example input/output files in example-inout-files/
