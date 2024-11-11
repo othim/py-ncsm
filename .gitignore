@@ -12,3 +12,5 @@ src/states/Nmax=*/
 src/hamiltonian/__pycache__/
 
 interactions/
+
+runs/

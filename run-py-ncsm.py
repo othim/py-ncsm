@@ -3,9 +3,7 @@
     --------------
 
     TODO: 
-    - Fix output file generation
-    - Fix ISOSPIN_SYM flag. -> fix it in the setup H file also.
-    - Add Lancos diag
+    - Add Lancos diag for large matrices
 '''
 # Import packages
 import os
@@ -79,7 +77,7 @@ else:
 if args['output_file']!='none':
     print(f'Writing output to file: {args["output_file"]}')
     original = sys.stdout
-    sys.stdout = open(args['output_file'], 'a')
+    sys.stdout = open(args['output_file'], 'w')
     print_git_version()
 
 print("-------------------------------------------------------------------------------")
@@ -155,7 +153,7 @@ for Nmax in args['nmax_arr']:
     end = time.time()
     print(f'Done! Time={(end-start)*1000:.3f} ms')
     
-    print(f'E={np.min(eigs):.3f} MeV')
+    print(f'E={np.min(eigs):.5f} MeV')
     print('----------------------------------\n\n')
     E_arr.append(np.min(eigs))
 
@@ -167,9 +165,9 @@ print("")
 print("-------------------------------------------------------------------------------")
 print("                                *** OUTPUT ***")
 print("-------------------------------------------------------------------------------")
-print(f'Nmax \t E \t  dim (Gamma) \t dim (alpha)') 
+print(f'Nmax \t E \t \t    dim (Gamma)  dim (alpha)') 
 for i,E in enumerate(E_arr):
-    print(f'{args["nmax_arr"][i]:<8} {E:<8.3f} {len_Gamma_arr[i]:<8} \t {len_alpha_arr[i]:<8}') 
+    print(f'{args["nmax_arr"][i]:<8} {E:<10.5f} {len_Gamma_arr[i]:<8} \t {len_alpha_arr[i]:<8}') 
 
 if args['output_file']!='none':
     sys.stdout = original

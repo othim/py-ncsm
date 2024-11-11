@@ -33,9 +33,12 @@ v1.0 Autum 2024
 # Installing and running the code:
 
 - Create the conda environment using the environment.yml file and activate 
-  the environment.
+  the environment:
 
-- Install the package wigxjpf. You can install it via pip.
+  $ conda env-create -f environment.yml
+  $ conda activate py-ncsm-env
+
+- Install the package wigxjpf, you can install it via pip.
 
 - Install the package gmosh using f2py by going to the directory src/external
   and follow the instruction in that directorys README file.

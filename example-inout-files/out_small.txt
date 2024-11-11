@@ -1,5 +1,5 @@
 *******************************************************************************
-***** Running py-ncsm. Version: 4c578354cfd149826bb4fdcf47a1e05d4c53eb89 ******
+***** Running py-ncsm. Version: 170eed28d050102971da2670faabfbf73eceedfe ******
 *******************************************************************************
 
 -------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ len(alpha_states)=2
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(1, 1). Done! Time=0 ms
 Diagonalizing Hamiltonian... Done! Time=0.107 ms
-E=12.165 MeV
+E=12.16523 MeV
 ----------------------------------
 
 
@@ -40,8 +40,8 @@ len(alpha_states)=14
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(5, 5). Done! Time=1 ms
-Diagonalizing Hamiltonian... Done! Time=0.188 ms
-E=4.880 MeV
+Diagonalizing Hamiltonian... Done! Time=0.181 ms
+E=4.88032 MeV
 ----------------------------------
 
 
@@ -52,8 +52,8 @@ len(alpha_states)=44
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(15, 15). Done! Time=3 ms
-Diagonalizing Hamiltonian... Done! Time=0.153 ms
-E=1.821 MeV
+Diagonalizing Hamiltonian... Done! Time=0.145 ms
+E=1.82073 MeV
 ----------------------------------
 
 
@@ -61,7 +61,7 @@ E=1.821 MeV
 -------------------------------------------------------------------------------
                                 *** OUTPUT ***
 -------------------------------------------------------------------------------
-Nmax 	 E 	  dim (Gamma) 	 dim (alpha)
-0        12.165   1        	 2       
-2        4.880    5        	 14      
-4        1.821    15       	 44      
+Nmax 	 E 	 	    dim (Gamma)  dim (alpha)
+0        12.16523   1        	 2       
+2        4.88032    5        	 14      
+4        1.82073    15       	 44      
