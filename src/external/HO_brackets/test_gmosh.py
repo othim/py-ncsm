@@ -30,5 +30,5 @@ print(gmosh.angmom_lib.gmosh(n,l,cN,cL,n1,l1,n2,l2,L,d))
 # TMB(EE,LL,ER,LR,E1,L1,E2,L2,LM,D)
 
 
-print(gmosh.tmb_brackets.tmb(int(2*n+l),int(l),int(2*cN+cL),int(cL),int(2*n1+l1)\
-        ,int(l1),int(2*n2+l2),int(l2),int(L),d))
+#print(gmosh.tmb_brackets.tmb(int(2*n+l),int(l),int(2*cN+cL),int(cL),int(2*n1+l1)\
+#        ,int(l1),int(2*n2+l2),int(l2),int(L),d))

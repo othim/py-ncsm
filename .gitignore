@@ -10,7 +10,7 @@ src/states/__pycache__/*
 src/states/Nmax=*/
 
 src/hamiltonian/__pycache__/
-
+src/external/HO_brackets/__pycache__/
 interactions/
 
 data-runs/

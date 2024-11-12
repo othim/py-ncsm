@@ -12,7 +12,7 @@ License: See LICENSE.txt file.
 Written by: 
 Oliver Thim,
 Chalmers University of Technology
-v1.0 Autum 2024
+v1.0 Autumn 2024
 
 ## Important things to note about the code:
 

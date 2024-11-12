@@ -3,7 +3,8 @@
     --------------
 
     TODO: 
-    - Add Lancos diag for large matrices
+    - Add Lanczos diag for large matrices. This is not currently the 
+      bottlenenck in the code.
 '''
 # Import packages
 import os
@@ -149,7 +150,7 @@ for Nmax in args['nmax_arr']:
     # Diagonalize the Hamiltonian
     print('Diagonalizing Hamiltonian... ',end='')
     start = time.time()
-    eigs,eigv = np.linalg.eigh(H_matrix_Gamma_basis)
+    eigs, eigv = np.linalg.eigh(H_matrix_Gamma_basis)
     end = time.time()
     print(f'Done! Time={(end-start)*1000:.3f} ms')
     
