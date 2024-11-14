@@ -1,4 +1,4 @@
-The file my_braket.f90 contains the relevant to call the function gmosh.
+The file my_braket.f90 contains the relevant code to call the function gmosh.
 
 Build and install the library by running:
 

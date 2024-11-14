@@ -78,7 +78,7 @@ else:
 if args['output_file']!='none':
     print(f'Writing output to file: {args["output_file"]}')
     original = sys.stdout
-    sys.stdout = open(args['output_file'], 'w')
+    sys.stdout = open(args['output_file'], 'a')
     print_git_version()
 
 print("-------------------------------------------------------------------------------")

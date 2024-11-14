@@ -1,5 +1,5 @@
 *******************************************************************************
-***** Running py-ncsm. Version: 4c578354cfd149826bb4fdcf47a1e05d4c53eb89 ******
+***** Running py-ncsm. Version: 7f15b06426db4b5ad3c754a52da021f3c748caf5 ******
 *******************************************************************************
 
 -------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ input_file = example-inout-files/in_large.txt
 nmax_arr         = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
 hbar_omega       = 24
 isospin_sym      = True
-interaction_file = interactions/idaho_n3lo_nmax_40_hw_24.txt
+interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
 output_file      = example-inout-files/out_large.txt
 
 
@@ -28,8 +28,8 @@ len(alpha_states)=2
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(1, 1). Done! Time=0 ms
-Diagonalizing Hamiltonian... Done! Time=0.146 ms
-E=12.165 MeV
+Diagonalizing Hamiltonian... Done! Time=0.106 ms
+E=12.16523 MeV
 ----------------------------------
 
 
@@ -40,8 +40,8 @@ len(alpha_states)=14
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(5, 5). Done! Time=1 ms
-Diagonalizing Hamiltonian... Done! Time=0.185 ms
-E=4.880 MeV
+Diagonalizing Hamiltonian... Done! Time=0.175 ms
+E=4.88032 MeV
 ----------------------------------
 
 
@@ -52,8 +52,8 @@ len(alpha_states)=44
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(15, 15). Done! Time=3 ms
-Diagonalizing Hamiltonian... Done! Time=0.144 ms
-E=1.821 MeV
+Diagonalizing Hamiltonian... Done! Time=0.145 ms
+E=1.82073 MeV
 ----------------------------------
 
 
@@ -63,9 +63,9 @@ len(Gamma_states)=34
 len(alpha_states)=100
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(34, 34). Done! Time=14 ms
-Diagonalizing Hamiltonian... Done! Time=0.354 ms
-E=-1.530 MeV
+Setting up Hamiltonian... shape=(34, 34). Done! Time=15 ms
+Diagonalizing Hamiltonian... Done! Time=0.330 ms
+E=-1.53028 MeV
 ----------------------------------
 
 
@@ -75,9 +75,9 @@ len(Gamma_states)=64
 len(alpha_states)=190
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(64, 64). Done! Time=45 ms
-Diagonalizing Hamiltonian... Done! Time=2.041 ms
-E=-3.111 MeV
+Setting up Hamiltonian... shape=(64, 64). Done! Time=44 ms
+Diagonalizing Hamiltonian... Done! Time=1.861 ms
+E=-3.11107 MeV
 ----------------------------------
 
 
@@ -87,9 +87,9 @@ len(Gamma_states)=108
 len(alpha_states)=322
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(108, 108). Done! Time=126 ms
-Diagonalizing Hamiltonian... Done! Time=0.975 ms
-E=-5.053 MeV
+Setting up Hamiltonian... shape=(108, 108). Done! Time=123 ms
+Diagonalizing Hamiltonian... Done! Time=1.056 ms
+E=-5.05301 MeV
 ----------------------------------
 
 
@@ -99,9 +99,9 @@ len(Gamma_states)=169
 len(alpha_states)=504
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(169, 169). Done! Time=310 ms
-Diagonalizing Hamiltonian... Done! Time=2.597 ms
-E=-6.126 MeV
+Setting up Hamiltonian... shape=(169, 169). Done! Time=307 ms
+Diagonalizing Hamiltonian... Done! Time=2.548 ms
+E=-6.12644 MeV
 ----------------------------------
 
 
@@ -111,9 +111,9 @@ len(Gamma_states)=249
 len(alpha_states)=744
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(249, 249). Done! Time=711 ms
-Diagonalizing Hamiltonian... Done! Time=3.911 ms
-E=-6.998 MeV
+Setting up Hamiltonian... shape=(249, 249). Done! Time=665 ms
+Diagonalizing Hamiltonian... Done! Time=4.000 ms
+E=-6.99774 MeV
 ----------------------------------
 
 
@@ -123,9 +123,9 @@ len(Gamma_states)=351
 len(alpha_states)=1050
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(351, 351). Done! Time=1334 ms
-Diagonalizing Hamiltonian... Done! Time=7.059 ms
-E=-7.442 MeV
+Setting up Hamiltonian... shape=(351, 351). Done! Time=1311 ms
+Diagonalizing Hamiltonian... Done! Time=7.290 ms
+E=-7.44174 MeV
 ----------------------------------
 
 
@@ -135,9 +135,9 @@ len(Gamma_states)=478
 len(alpha_states)=1430
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(478, 478). Done! Time=2510 ms
-Diagonalizing Hamiltonian... Done! Time=14.882 ms
-E=-7.667 MeV
+Setting up Hamiltonian... shape=(478, 478). Done! Time=2443 ms
+Diagonalizing Hamiltonian... Done! Time=12.269 ms
+E=-7.66690 MeV
 ----------------------------------
 
 
@@ -147,9 +147,9 @@ len(Gamma_states)=632
 len(alpha_states)=1892
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(632, 632). Done! Time=4282 ms
-Diagonalizing Hamiltonian... Done! Time=28.354 ms
-E=-7.773 MeV
+Setting up Hamiltonian... shape=(632, 632). Done! Time=4281 ms
+Diagonalizing Hamiltonian... Done! Time=24.809 ms
+E=-7.77277 MeV
 ----------------------------------
 
 
@@ -159,9 +159,9 @@ len(Gamma_states)=816
 len(alpha_states)=2444
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(816, 816). Done! Time=7123 ms
-Diagonalizing Hamiltonian... Done! Time=52.208 ms
-E=-7.808 MeV
+Setting up Hamiltonian... shape=(816, 816). Done! Time=7091 ms
+Diagonalizing Hamiltonian... Done! Time=53.610 ms
+E=-7.80822 MeV
 ----------------------------------
 
 
@@ -171,9 +171,9 @@ len(Gamma_states)=1033
 len(alpha_states)=3094
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(1033, 1033). Done! Time=11545 ms
-Diagonalizing Hamiltonian... Done! Time=100.643 ms
-E=-7.834 MeV
+Setting up Hamiltonian... shape=(1033, 1033). Done! Time=11593 ms
+Diagonalizing Hamiltonian... Done! Time=102.755 ms
+E=-7.83425 MeV
 ----------------------------------
 
 
@@ -183,9 +183,9 @@ len(Gamma_states)=1285
 len(alpha_states)=3850
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(1285, 1285). Done! Time=17997 ms
-Diagonalizing Hamiltonian... Done! Time=169.954 ms
-E=-7.840 MeV
+Setting up Hamiltonian... shape=(1285, 1285). Done! Time=17982 ms
+Diagonalizing Hamiltonian... Done! Time=168.863 ms
+E=-7.84040 MeV
 ----------------------------------
 
 
@@ -195,9 +195,9 @@ len(Gamma_states)=1575
 len(alpha_states)=4720
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(1575, 1575). Done! Time=27224 ms
-Diagonalizing Hamiltonian... Done! Time=347.590 ms
-E=-7.847 MeV
+Setting up Hamiltonian... shape=(1575, 1575). Done! Time=27276 ms
+Diagonalizing Hamiltonian... Done! Time=378.931 ms
+E=-7.84706 MeV
 ----------------------------------
 
 
@@ -207,9 +207,9 @@ len(Gamma_states)=1906
 len(alpha_states)=5712
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(1906, 1906). Done! Time=39841 ms
-Diagonalizing Hamiltonian... Done! Time=586.024 ms
-E=-7.849 MeV
+Setting up Hamiltonian... shape=(1906, 1906). Done! Time=40009 ms
+Diagonalizing Hamiltonian... Done! Time=583.141 ms
+E=-7.84876 MeV
 ----------------------------------
 
 
@@ -217,20 +217,20 @@ E=-7.849 MeV
 -------------------------------------------------------------------------------
                                 *** OUTPUT ***
 -------------------------------------------------------------------------------
-Nmax 	 E 	  dim (Gamma) 	 dim (alpha)
-0        12.165   1        	 2       
-2        4.880    5        	 14      
-4        1.821    15       	 44      
-6        -1.530   34       	 100     
-8        -3.111   64       	 190     
-10       -5.053   108      	 322     
-12       -6.126   169      	 504     
-14       -6.998   249      	 744     
-16       -7.442   351      	 1050    
-18       -7.667   478      	 1430    
-20       -7.773   632      	 1892    
-22       -7.808   816      	 2444    
-24       -7.834   1033     	 3094    
-26       -7.840   1285     	 3850    
-28       -7.847   1575     	 4720    
-30       -7.849   1906     	 5712    
+Nmax 	 E 	 	    dim (Gamma)  dim (alpha)
+0        12.16523   1        	 2       
+2        4.88032    5        	 14      
+4        1.82073    15       	 44      
+6        -1.53028   34       	 100     
+8        -3.11107   64       	 190     
+10       -5.05301   108      	 322     
+12       -6.12644   169      	 504     
+14       -6.99774   249      	 744     
+16       -7.44174   351      	 1050    
+18       -7.66690   478      	 1430    
+20       -7.77277   632      	 1892    
+22       -7.80822   816      	 2444    
+24       -7.83425   1033     	 3094    
+26       -7.84040   1285     	 3850    
+28       -7.84706   1575     	 4720    
+30       -7.84876   1906     	 5712    

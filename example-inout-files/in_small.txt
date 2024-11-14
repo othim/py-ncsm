@@ -1,6 +1,6 @@
 [settings]
-nmax_arr         = [0,2,4]
+nmax_arr         = [0,2,4,10,20]
 hbar_omega       = 24    # hbar_omega in MeV.
 isospin_sym      = True
-interaction_file = interactions/idaho_n3lo_nmax_40_hw_24.txt
+interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
 output_file      = example-inout-files/out_small.txt
