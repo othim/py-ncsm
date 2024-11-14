@@ -70,10 +70,10 @@ v1.0 Autumn 2024
 
   ----------------------------- input_file.txt --------------------------------
   [settings]
-  nmax_arr         = [0,2,4]
+  nmax_arr         = [0,2,4,10,20]
   hbar_omega       = 24    # hbar_omega in MeV.
   isospin_sym      = True
-  interaction_file = interactions/idaho_n3lo_nmax_40_hw_24.txt
+  interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
   output_file      = example-inout-files/out_small.txt
   ------------------------- END input_file.txt --------------------------------
 
@@ -95,6 +95,8 @@ v1.0 Autumn 2024
   0        12.16523   1        	  2       
   2        4.88032    5        	  14      
   4        1.82073    15       	  44      
+  10       -5.05301   108      	  322     
+  20       -7.77277   632      	  1892    
 
   ------------------------- END output_file.txt -------------------------------
 
