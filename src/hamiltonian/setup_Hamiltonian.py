@@ -199,7 +199,11 @@ def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast
     
     # Setup empty matrix
     V_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
-    
+    for i,bra in enumerate(alpha_basis_list):
+        for j,ket in enumerate(alpha_basis_list):
+            el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
+            V_matrix[i,j] = el
+    '''
     if fast:
         for i,bra in enumerate(alpha_basis_list):
             for j,ket in enumerate(alpha_basis_list):
@@ -212,7 +216,7 @@ def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast
             for j,ket in enumerate(alpha_basis_list):
                 el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
                 V_matrix[i,j] = el
-
+    '''
     return V_matrix
 
 def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
@@ -221,7 +225,11 @@ def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
     '''
     
     T_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
-
+    for i,bra in enumerate(alpha_basis_list):
+        for j,ket in enumerate(alpha_basis_list):
+            el = get_T_me_alpha_basis(bra,ket,Omega,mN)
+            T_matrix[i,j] = el
+    '''
     # If fast=True, use that V^\dagger = V and only compute half of the elements
     if fast:
         for i,bra in enumerate(alpha_basis_list):
@@ -235,6 +243,7 @@ def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
             for j,ket in enumerate(alpha_basis_list):
                 el = get_T_me_alpha_basis(bra,ket,Omega,mN)
                 T_matrix[i,j] = el
+    '''
     return T_matrix
 
 def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast):
