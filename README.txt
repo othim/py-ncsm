@@ -73,6 +73,8 @@ v1.0 Autumn 2024
   nmax_arr         = [0,2,4,10,20]
   hbar_omega       = 24    # hbar_omega in MeV.
   isospin_sym      = True
+  fast_comp        = False # Not implemented
+  dim_lanczos      = 2000
   interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
   output_file      = example-inout-files/out_small.txt
   ------------------------- END input_file.txt --------------------------------
@@ -91,12 +93,12 @@ v1.0 Autumn 2024
   -----------------------------------------------------------------------------
                                   *** OUTPUT ***
   -----------------------------------------------------------------------------
-  Nmax     E 	 	  dim (Gamma) dim (alpha)
-  0        12.16523   1        	  2       
-  2        4.88032    5        	  14      
-  4        1.82073    15       	  44      
-  10       -5.05301   108      	  322     
-  20       -7.77277   632      	  1892    
+  Nmax  E          dim (Gamma)  dim (alpha)  Comp. H (ms)  Diag. H (ms)  method
+  0     12.16523   1            2            0             0             exact   
+  2     4.88032    5            14           1             0             exact   
+  4     1.82073    15           44           3             0             exact   
+  10    -5.05301   108          322          131           1             exact   
+  20    -7.77277   632          1892         4411          29            exact   
 
   ------------------------- END output_file.txt -------------------------------
 
