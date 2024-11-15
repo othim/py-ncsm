@@ -1,5 +1,5 @@
 *******************************************************************************
-***** Running py-ncsm. Version: d99b72d2e4c0c8140e95c3903334717a158e1c02 ******
+***** Running py-ncsm. Version: 2438592b21e1b6262acfb8c00d3bfccc8fbf3da2 ******
 *******************************************************************************
 
 -------------------------------------------------------------------------------
@@ -14,6 +14,7 @@ nmax_arr         = [0, 2, 4, 10, 20]
 hbar_omega       = 24
 isospin_sym      = True
 fast_comp        = False
+dim_lanczos      = 2000
 interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
 output_file      = example-inout-files/out_small.txt
 
@@ -29,7 +30,7 @@ len(alpha_states)=2
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(1, 1). Done! Time=0 ms
-Diagonalizing Hamiltonian... Done! Time=0.105 ms
+Diagonalizing Hamiltonian... exact diag... Done! Time=0.108 ms
 E=12.16523 MeV
 ----------------------------------
 
@@ -41,7 +42,7 @@ len(alpha_states)=14
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(5, 5). Done! Time=1 ms
-Diagonalizing Hamiltonian... Done! Time=0.187 ms
+Diagonalizing Hamiltonian... exact diag... Done! Time=0.188 ms
 E=4.88032 MeV
 ----------------------------------
 
@@ -53,7 +54,7 @@ len(alpha_states)=44
 
 Loading potential matrix elements... Done!
 Setting up Hamiltonian... shape=(15, 15). Done! Time=3 ms
-Diagonalizing Hamiltonian... Done! Time=0.141 ms
+Diagonalizing Hamiltonian... exact diag... Done! Time=0.152 ms
 E=1.82073 MeV
 ----------------------------------
 
@@ -64,8 +65,8 @@ len(Gamma_states)=108
 len(alpha_states)=322
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(108, 108). Done! Time=125 ms
-Diagonalizing Hamiltonian... Done! Time=1.320 ms
+Setting up Hamiltonian... shape=(108, 108). Done! Time=131 ms
+Diagonalizing Hamiltonian... exact diag... Done! Time=1.344 ms
 E=-5.05301 MeV
 ----------------------------------
 
@@ -76,8 +77,8 @@ len(Gamma_states)=632
 len(alpha_states)=1892
 
 Loading potential matrix elements... Done!
-Setting up Hamiltonian... shape=(632, 632). Done! Time=4322 ms
-Diagonalizing Hamiltonian... Done! Time=27.163 ms
+Setting up Hamiltonian... shape=(632, 632). Done! Time=4411 ms
+Diagonalizing Hamiltonian... exact diag... Done! Time=28.974 ms
 E=-7.77277 MeV
 ----------------------------------
 
@@ -86,9 +87,9 @@ E=-7.77277 MeV
 -------------------------------------------------------------------------------
                                 *** OUTPUT ***
 -------------------------------------------------------------------------------
-Nmax 	 E 	 	    dim (Gamma)  dim (alpha)
-0        12.16523   1        	 2       
-2        4.88032    5        	 14      
-4        1.82073    15       	 44      
-10       -5.05301   108      	 322     
-20       -7.77277   632      	 1892    
+Nmax  E          dim (Gamma)  dim (alpha)  Comp. H (ms)  Diag. H (ms)  method
+0     12.16523   1            2            0             0             exact   
+2     4.88032    5            14           1             0             exact   
+4     1.82073    15           44           3             0             exact   
+10    -5.05301   108          322          131           1             exact   
+20    -7.77277   632          1892         4411          29            exact   

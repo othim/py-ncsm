@@ -2,14 +2,12 @@
     run-py-ncsm.py
     --------------
 
-    TODO: 
-    - Add Lanczos diag for large matrices. This is not currently the 
-      bottlenenck in the code.
 '''
 # Import packages
 import os
 import sys
 import numpy as np
+import scipy.sparse.linalg as sl
 import configparser
 import json
 import time
@@ -39,10 +37,12 @@ def get_default_args():
         in case no infile is provided.
     '''
     args = {}
-    args['nmax_arr']         = [0,2,4,6,8]
+    #args['nmax_arr']         = [0,2,4,6,8]
+    args['nmax_arr']         = [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
     args['hbar_omega']       = 24
     args['isospin_sym']      = True
     args['fast_comp']        = False
+    args['dim_lanczos']      = 2000
     args['interaction_file'] = "interactions/nmax36_sqb_Np100.txt"
     args['output_file']      = "none"
     return args
@@ -53,6 +53,8 @@ def get_args_from_infile(file):
     args['nmax_arr'] = json.loads(args['nmax_arr']) # Convert to dictionary
     args['hbar_omega']    = int(args['hbar_omega'])
     args['isospin_sym']   = (args['isospin_sym'] == 'True')
+    args['fast_comp']     = (args['fast_comp'] == 'True')
+    args['dim_lanczos']   = int(args['dim_lanczos']) 
     return args
 
 # *****************************************************************************
@@ -106,11 +108,14 @@ print("-------------------------------------------------------------------------
 # *****************************************************************************
 # ******************************* LOOP OVER NMAX ******************************
 # *****************************************************************************
-E_arr = []
+E_arr         = []
 len_Gamma_arr = []
 len_alpha_arr = []
+method_arr    = []
+time_arr      = []
 for Nmax in args['nmax_arr']:
-    
+    time_d = {}
+
     basis_state_dir=f'src/states/Nmax={Nmax}_data'
     # Read in the basis states and change-of-basis matrix
     print(f'Reading states from \'{basis_state_dir}\'... ',end='')
@@ -147,13 +152,24 @@ for Nmax in args['nmax_arr']:
             args['isospin_sym'],args['fast_comp'])
     print(f'shape={H_matrix_Gamma_basis.shape}. ',end='')
     end = time.time()
+    time_d['set_H'] = (end-start)*1000.0
     print(f'Done! Time={(end-start)*1000:.0f} ms')
 
     # Diagonalize the Hamiltonian
     print('Diagonalizing Hamiltonian... ',end='')
     start = time.time()
-    eigs, eigv = np.linalg.eigh(H_matrix_Gamma_basis)
+    # If the dimension is large enough Lanczos diagonalization is used
+    if H_matrix_Gamma_basis.shape[0]<args['dim_lanczos']:
+        print('exact diag... ',end='')
+        eigs, eigv = np.linalg.eigh(H_matrix_Gamma_basis)
+        method_arr.append('exact')
+    else:
+        print('Lanczos diag... ',end='')
+        eigs, eigv  = sl.eigsh(H_matrix_Gamma_basis,k=1,tol=0,which='SA')
+        method_arr.append('Lanczos')
     end = time.time()
+    time_d['diag'] = (end-start)*1000.0
+    time_arr.append(time_d)
     print(f'Done! Time={(end-start)*1000:.3f} ms')
     
     print(f'E={np.min(eigs):.5f} MeV')
@@ -168,9 +184,9 @@ print("")
 print("-------------------------------------------------------------------------------")
 print("                                *** OUTPUT ***")
 print("-------------------------------------------------------------------------------")
-print(f'Nmax \t E \t \t    dim (Gamma)  dim (alpha)') 
+print(f'Nmax  E          dim (Gamma)  dim (alpha)  Comp. H (ms)  Diag. H (ms)  method') 
 for i,E in enumerate(E_arr):
-    print(f'{args["nmax_arr"][i]:<8} {E:<10.5f} {len_Gamma_arr[i]:<8} \t {len_alpha_arr[i]:<8}') 
+    print(f'{args["nmax_arr"][i]:<5} {E:<10.5f} {len_Gamma_arr[i]:<12} {len_alpha_arr[i]:<12} {time_arr[i]["set_H"]:<13.0f} {time_arr[i]["diag"]:<13.0f} {method_arr[i]:<8}') 
 
 if args['output_file']!='none':
     sys.stdout = original
