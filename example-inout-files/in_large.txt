@@ -2,6 +2,6 @@
 nmax_arr         = [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
 hbar_omega       = 24    # hbar_omega in MeV.
 isospin_sym      = True
-fast_comp        = False
+fast_comp        = False # Not implemented
 interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
-output_file      = none #example-inout-files/out_large.txt
+output_file      = example-inout-files/out_large.txt
