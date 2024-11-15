@@ -42,6 +42,7 @@ def get_default_args():
     args['nmax_arr']         = [0,2,4,6,8]
     args['hbar_omega']       = 24
     args['isospin_sym']      = True
+    args['fast_comp']        = False
     args['interaction_file'] = "interactions/nmax36_sqb_Np100.txt"
     args['output_file']      = "none"
     return args
@@ -142,7 +143,8 @@ for Nmax in args['nmax_arr']:
     print('Setting up Hamiltonian... ',end='')
     start = time.time()
     H_matrix_Gamma_basis = sh.setup_H_Gamma_basis(Gamma_to_alpha,\
-            alpha_basis_list,Gamma_basis_list,args['hbar_omega'],mN,pot_dict,args['isospin_sym'])
+            alpha_basis_list,Gamma_basis_list,args['hbar_omega'],mN,pot_dict,\
+            args['isospin_sym'],args['fast_comp'])
     print(f'shape={H_matrix_Gamma_basis.shape}. ',end='')
     end = time.time()
     print(f'Done! Time={(end-start)*1000:.0f} ms')

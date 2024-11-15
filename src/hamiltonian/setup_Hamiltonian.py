@@ -192,43 +192,62 @@ def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
 
 
 
-def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym):
+def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast):
     ''' 
         Construct the potential matrix from the potential elements.
     '''
     
     # Setup empty matrix
     V_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
-    for i,bra in enumerate(alpha_basis_list):
-        for j,ket in enumerate(alpha_basis_list):
-            el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
-            V_matrix[i,j] = el
+    
+    if fast:
+        for i,bra in enumerate(alpha_basis_list):
+            for j,ket in enumerate(alpha_basis_list):
+                if (j<i) : continue
+                el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
+                V_matrix[i,j] = el
+                V_matrix[j,i] = np.conj(el)
+    else:
+        for i,bra in enumerate(alpha_basis_list):
+            for j,ket in enumerate(alpha_basis_list):
+                el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
+                V_matrix[i,j] = el
 
     return V_matrix
 
-def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN):
+def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
     '''
         Construct the kinetic energy matrix from the kinetic energy elements.
     '''
     
     T_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
-    for i,bra in enumerate(alpha_basis_list):
-        for j,ket in enumerate(alpha_basis_list):
-            el = get_T_me_alpha_basis(bra,ket,Omega,mN)
-            T_matrix[i,j] = el
+
+    # If fast=True, use that V^\dagger = V and only compute half of the elements
+    if fast:
+        for i,bra in enumerate(alpha_basis_list):
+            for j,ket in enumerate(alpha_basis_list):
+                if (j<i) : continue
+                el = get_T_me_alpha_basis(bra,ket,Omega,mN)
+                T_matrix[i,j] = el
+                T_matrix[j,i] = np.conj(el)
+    else:
+        for i,bra in enumerate(alpha_basis_list):
+            for j,ket in enumerate(alpha_basis_list):
+                el = get_T_me_alpha_basis(bra,ket,Omega,mN)
+                T_matrix[i,j] = el
     return T_matrix
 
-def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym):
+def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast):
     '''
        Construct the Hamiltonian matrix H = T+V in the alpha basis.
     '''
     
     # Compute kinetic energy operator
-    T_alpha_basis = get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN)
+    T_alpha_basis = get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast)
     
     # Compute potential operator
     V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,\
-            isospin_sym)
+            isospin_sym,fast)
     return T_alpha_basis + V_alpha_basis
 
 def alpha_to_Gamma_basis(Gamma_to_alpha_matrix,M_alpha_basis):
@@ -240,14 +259,15 @@ def alpha_to_Gamma_basis(Gamma_to_alpha_matrix,M_alpha_basis):
     
 
 def setup_H_Gamma_basis(Gamma_to_alpha_matrix,alpha_basis_list,Gamma_basis_list,\
-        Omega,mN,pot_dict,isospin_sym):
+        Omega,mN,pot_dict,isospin_sym,fast):
     
     # Compute kinetic energy operator.
-    T_alpha_basis = 3*get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN)
+    T_alpha_basis = 3*get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast)
     T_Gamma_basis = alpha_to_Gamma_basis(Gamma_to_alpha_matrix,T_alpha_basis)
     
     # Compute potential operator
-    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym)
+    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,\
+            isospin_sym,fast)
     V_Gamma_basis = 3*alpha_to_Gamma_basis(Gamma_to_alpha_matrix,V_alpha_basis)
     
     return T_Gamma_basis + V_Gamma_basis
