@@ -6,7 +6,7 @@
 
 .DS_Store
 
-src/states/__pycache__/*
+src/states/__pycache__/
 src/states/Nmax=*/
 
 src/hamiltonian/__pycache__/

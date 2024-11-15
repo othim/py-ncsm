@@ -8,7 +8,7 @@ dependencies:
 - ConfigParser
 - gitpython
 - mkl-service
-- pip
+- charset_normalizer
 pip:
 - ctypes
 - pywigxjpf

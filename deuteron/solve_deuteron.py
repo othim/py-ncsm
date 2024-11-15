@@ -27,7 +27,7 @@ import load_potential as lp
 Omega = 24   # MeV
 mN    = 0  # MeV (not needed)
 isospin_sym = True
-
+fast        =  False
 # Deuteron channel
 j  = 1
 t  = 0
@@ -67,7 +67,8 @@ for Nmax in Nmax_arr:
         print(s)
 
     # Setup Hamiltonian and diagonalize
-    H_matrix_Gamma_basis = sH.setup_H_alpha_basis(JTpi_block,Omega,mN,pot_dict,isospin_sym)
+    H_matrix_Gamma_basis = sH.setup_H_alpha_basis(JTpi_block,Omega,mN,pot_dict,\
+            isospin_sym,fast)
     eigs,eigv = np.linalg.eigh(H_matrix_Gamma_basis)
     E_arr.append(np.min(eigs))
     print(f'\nnp.min(eigs) = {np.min(eigs):.4f} MeV\n\n')

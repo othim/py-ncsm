@@ -7,6 +7,16 @@ $ make f2py
 You can test that the function is called correctly by running the 
 test script 
 
+You can get erros if charset_normalizer is not installed. To install use
+
+$ pip install charset_normalizer
+
+If you have problems with meson, try
+
+$ pip install meson
+
+to get the newest version.
+
 $ python test_gmosh.py
 
 
