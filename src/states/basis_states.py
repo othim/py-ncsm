@@ -10,19 +10,6 @@
 import time
 from itertools import groupby
 
-
-def psi_nlm(n,l,m,r,theta,phi):
-    '''
-        Computes the single-particle HO wave function as defined in (...)
-
-        Args:
-
-
-        Returns:
-    '''
-    return 0
-
-
 def NN_basis_nl(N_max, verbose=False):
     '''
         Computes 2N basis states which are antisymmetrized
@@ -70,6 +57,9 @@ def triag(L, S, J):
         return True
 
 def test_basis_state(basis_state):
+    '''
+        Function that tests if a 3N basis state fullfills basic requirements.
+    '''
     l = basis_state['l']
     s = basis_state['s']
     t = basis_state['t']
@@ -114,10 +104,10 @@ def NNN_basis_nl(N_max, verbose=False):
         respective quantum numbers as this is more convenient to save since 
         these quantum numbers are half integers.
     Args:
-        N_max (int)             : Maximum HO energy, N = 2n+l + 2*cN+cL (cN = \mathcal{N})
+        N_max (int)  : Maximum HO energy, N = 2n+l + 2*cN+cL (cN = \mathcal{N})
     Returns:
         basis (list) : list of 'basis_states (dictionary)' that contains keys : 
-        dictionary(n,l,s,j,t,cN,cL,cJ2,J2,T2,N)
+        dictionary(n,l,s,j,t,cN,cL,cJ2,J2,T2,N,pi)
     '''
     basis = []
     for n in range(0,int(N_max/2)+1,1):  # n = 0,...,int(Nmax/2)
@@ -176,13 +166,13 @@ def NNN_basis_nl(N_max, verbose=False):
 
 def group_NNN_basis_nl(grouper, basis, verbose=False):
     '''
-        Groups the states in the keys defined in items
+        Groups the states in the keys defined by the grouper.
 
     Args:
         grouper (Object)  : Grouper for which keys that will be grouped. E.g.
                             itemgetter("N","J2", "T2") 
         basis (list) : list of basis states as computed with 
-                       basis_states.NN_basis_nl()
+                       basis_states.NNN_basis_nl()
 
     Returns:
         grouped_basis (list) : List of groups of basis states with the same
@@ -201,11 +191,12 @@ def group_NNN_basis_nl(grouper, basis, verbose=False):
             for state in chn:
                 print(state)
             print('')
+
     return grouped_basis,key_list
 
 def NNN_basis_nl_check_equal(list1,list2, verbose=False):
     ''' 
-        Check if two lists of thates contains the same states
+        Check if two lists contains the same states.
     '''
 
         # Sort both lists of dictionaries for comparison
@@ -215,22 +206,11 @@ def NNN_basis_nl_check_equal(list1,list2, verbose=False):
     # Compare the sorted lists
     return sorted_list1 == sorted_list2
 
-##    states_A = copy(
-#   for i,sA in enumerate(states_A):
-#        for j, sB in enumerate(states_B):
-#            if (sA == sB):
-
-
 
 # If you run only this file you can check some functions
 if __name__ == "__main__":
     start = time.time()
-    NNStates = NN_basis_j(0,10,0,0)
-    end = time.time()
-    print(f'NN_basis_j: {(end-start)*1e3:.4f} ms')
-    
-    start = time.time()
     Nmax = 30
     NNStates = NNN_basis_nl(Nmax,True)
     end = time.time()
-    print(f'NN_basis_nl, Nmax={Nmax}, time={(end-start)*1e3:.4f} ms')
+    print(f'NNN_basis_nl, Nmax={Nmax}, time={(end-start)*1e3:.4f} ms')

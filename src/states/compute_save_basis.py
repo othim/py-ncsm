@@ -3,6 +3,8 @@
     --------------------
     
     This program computes and saves the basis states and transformation matrix.
+    NOTE that you might need to change som settings of the code in the 
+    VARIABLES section.
 
     Oliver Thim (2024)
 '''
@@ -41,6 +43,7 @@ def to_int(str_list):
     for s in str_list:
         int_list.append(int(s))
     return int_list
+
 # *****************************************************************************
 # *****************************************************************************
 # ********************************** MAIN *************************************
@@ -48,6 +51,9 @@ def to_int(str_list):
 
 # This program computes basis states for a given (J,T,pi) block and compute
 # the basis change matric going from the alpha to Gamma basis.
+
+
+
 
 # *****************************************************************************
 # ******************************** VARIABLES **********************************
@@ -57,10 +63,9 @@ J2 = 1
 T2 = 1
 pi = 1
 print_states = True
-one_tol = 1e-5
+one_tol = 1e-5 # Tolareance for an eigenvalue to be classified as one.
 
 save_data = True
-# ***********************************
 
 # Parse and set the NMAX_ARR argument
 parser = argparse.ArgumentParser(prog='compute_save_basis')
@@ -71,6 +76,9 @@ print(f'NMAX={NMAX_ARR}')
 
 # *****************************************************************************
 # *****************************************************************************
+
+
+
 
 start_prog = time.time()
 # Pre-populate arrays in FORTRAN code. This is necessary for calling the function
