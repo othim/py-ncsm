@@ -1,7 +1,7 @@
 # Brief description
 
-py-ncsm is is a simple NCSM code for solving the A=3 nucleon system written
-in python. The code is not optimized or very fast, but istead written in a 
+py-ncsm is a simple NCSM code for solving the A=3 nucleon system written
+in python. The code is not optimized, but istead written in a 
 simple and understandable manner for ease of use. 
 
 In the directory 'deuteron/' there is also a script to solve for the deuteron 
@@ -16,12 +16,12 @@ v1.0 Autumn 2024
 
 ## Important things to note about the code:
 
-- This code is primarely written to consider the triton (^3H) in the limit of
+- This code is primarily written to consider the triton (^3H) in the limit of
   isospin symmetry. This is reminded through the flag:
 
   isospin_sym = True
 
-  If isospin_sym is this is set to false, the code will terminate since that is 
+  If isospin_sym is set to false, the code will terminate since that is 
   not implemented.
 
 ## External dependencies:
@@ -41,7 +41,7 @@ v1.0 Autumn 2024
 - Install the package wigxjpf, you can install it via pip.
 
 - Install the package gmosh using f2py by going to the directory src/external
-  and follow the instruction in that directorys README file.
+  and follow the instructions in the README file in that directory.
 
 - The code needs pre-calculated 3N basis states and the transformation matrix
   between the partially antisymmetrized and fully antisymmetrized 3N basis.
@@ -52,19 +52,19 @@ v1.0 Autumn 2024
   With e.g. <Nmax_list> =0,2,4.
 
   This generates a directory in src/states/Nmax=<Nmax>_data/ that contains the 
-  pre-calculated data. Note that the storage space needed might not negligable
-  for Nmax>~40. NOTE that you need to set (J,T,pi) values in the file
+  pre-calculated data. Note that the storage space needed might not be 
+  negligable for Nmax>~40. NOTE that you need to set (J,T,pi) values in the file
   compute_save_basis.py. The default is the triton channel (1,1,1).
 
 - To run the code you just need to specify an input file and run the code.
   
   If an input file is NOT provided the variables are set in the default section 
-  of the code and the output will by default be printed to screen. This mode
+  of the code and the output will by default be printed to stdout. This mode
   can be useful e.g. for testing. E.g. 
 
   $ python run-py-ncsm.py
 
-  An input file is provided as by running:
+  An input file is provided by running:
 
   $ python run-py-nscm.py example_input_file_1.txt
 

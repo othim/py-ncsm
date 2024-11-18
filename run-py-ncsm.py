@@ -1,6 +1,10 @@
 '''
     run-py-ncsm.py
     --------------
+    
+    TODO:
+
+    - Remove mN parameter where it is not needed.
 
 '''
 # Import packages
