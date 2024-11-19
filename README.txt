@@ -26,7 +26,7 @@ v1.0 Autumn 2024
 
 ## External dependencies:
 
-- FORTRAN code for computing Moshinsky brackets. (TODO)
+- FORTRAN code for computing Moshinsky brackets.
 
 - Code to compute Wigner symbols: wigxjpf (installable via pip)
 
@@ -53,14 +53,14 @@ v1.0 Autumn 2024
 
   This generates a directory in src/states/Nmax=<Nmax>_data/ that contains the 
   pre-calculated data. Note that the storage space needed might not be 
-  negligable for Nmax>~40. NOTE that you need to set (J,T,pi) values in the file
+  negligable for Nmax>~40. NOTE that you need to set (2*J,2*T,pi) values in the file
   compute_save_basis.py. The default is the triton channel (1,1,1).
 
-- To run the code you just need to specify an input file and run the code.
+- To run the code you just need to specify an input file.
   
   If an input file is NOT provided the variables are set in the default section 
   of the code and the output will by default be printed to stdout. This mode
-  can be useful e.g. for testing. E.g. 
+  can be useful e.g. for testing:
 
   $ python run-py-ncsm.py
 
@@ -72,7 +72,7 @@ v1.0 Autumn 2024
   [settings]
   nmax_arr         = [0,2,4,10,20]
   hbar_omega       = 24    # hbar_omega in MeV.
-  isospin_sym      = True
+  isospin_sym      = True  
   fast_comp        = False # Not implemented
   dim_lanczos      = 2000
   interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
@@ -80,7 +80,7 @@ v1.0 Autumn 2024
   ------------------------- END input_file.txt --------------------------------
 
 
-  This will generate the corresponding output file <outdir>/<out_file_name>
+  This will generate the corresponding output file <outdir>/<out_file_name>.
 
 - The output file has the following general structure:
 
