@@ -35,7 +35,7 @@ v1.0 Autumn 2024
 - Create the conda environment using the environment.yml file and activate 
   the environment:
 
-  $ conda env-create -f environment.yml
+  $ conda env create -f environment.yml
   $ conda activate py-ncsm-env
 
 - Install the package wigxjpf, you can install it via pip.
@@ -47,7 +47,7 @@ v1.0 Autumn 2024
   between the partially antisymmetrized and fully antisymmetrized 3N basis.
   To pre-calculate and store states for a given Nmax run the command: 
 
-  $ src/states/compute_save_basis.py --Nmax=<Nmax_list>
+  $ python src/states/compute_save_basis.py --NMAX=<Nmax_list>
 
   With e.g. <Nmax_list> =0,2,4.
 
@@ -102,7 +102,7 @@ v1.0 Autumn 2024
 
   ------------------------- END output_file.txt -------------------------------
 
-- To benchmark the code, you can verify that the output of the code is the same
-  and the corresponing example input/output files in example-inout-files/
+- To benchmark the code, you can verify that the output from running the 
+  example input files are the same as in example-inout-files/out_benchmark/
 
 - Have fun!

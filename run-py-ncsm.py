@@ -5,6 +5,7 @@
     TODO:
 
     - Remove mN parameter where it is not needed.
+    - Implement the general expressions for the isospin avg
 
 '''
 # Import packages
@@ -85,7 +86,7 @@ else:
 if args['output_file']!='none':
     print(f'Writing output to file: {args["output_file"]}')
     original = sys.stdout
-    sys.stdout = open(args['output_file'], 'a')
+    sys.stdout = open(args['output_file'], 'w')
     print_git_version()
 
 print("-------------------------------------------------------------------------------")
