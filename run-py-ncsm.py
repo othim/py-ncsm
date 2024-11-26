@@ -191,7 +191,7 @@ print("                                *** OUTPUT ***")
 print("-------------------------------------------------------------------------------")
 print(f'Nmax  E          dim (Gamma)  dim (alpha)  Comp. H (ms)  Diag. H (ms)  method') 
 for i,E in enumerate(E_arr):
-    print(f'{args["nmax_arr"][i]:<5} {E:<10.5f} {len_Gamma_arr[i]:<12} {len_alpha_arr[i]:<12} {time_arr[i]["set_H"]:<13.0f} {time_arr[i]["diag"]:<13.0f} {method_arr[i]:<8}') 
+    print(f'{args["nmax_arr"][i]:<5} {E:<10.16f} {len_Gamma_arr[i]:<12} {len_alpha_arr[i]:<12} {time_arr[i]["set_H"]:<13.0f} {time_arr[i]["diag"]:<13.0f} {method_arr[i]:<8}') 
 
 if args['output_file']!='none':
     sys.stdout = original
