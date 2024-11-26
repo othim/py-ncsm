@@ -33,9 +33,11 @@ j  = 1
 t  = 0
 pi = 1
 
-interaction_file="../interactions/idaho_n3lo_nmax_40_hw_24.txt"
+#interaction_file="../interactions/idaho_n3lo_nmax_40_hw_24.txt"
+interaction_file="/Users/toliver/Documents/phd/projects/bayes_dwb/tmp/full_LO.txt"
 
-Nmax_arr = [0,2,4,6,8,10,12,14,16,20,24,28,30,32,34,36,38,40]
+#Nmax_arr = [0,2,4,6,8,10,12,14,16,20,24,28,30,32,34,36,38,40]
+Nmax_arr = [0,2,4,6,8,10,12,14,16,20,24,28]
 
 # *****************************************************************************
 # *****************************************************************************

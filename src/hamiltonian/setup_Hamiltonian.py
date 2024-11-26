@@ -128,7 +128,7 @@ def get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega,mN):
 
 def get_two_body_HO_potential_el(n,l,n_p,l_p,s,j,t,pot_dict,isospin_sym):
     el = 0
-    if isospin_sym:
+    if not isospin_sym:
         # NOTE: This implementation is specifically for ^3H!!
         if (t==0):
             m_t = 0
@@ -142,8 +142,10 @@ def get_two_body_HO_potential_el(n,l,n_p,l_p,s,j,t,pot_dict,isospin_sym):
             key2 = (n,l,n_p,l_p,s,j,1)
             el += pot_dict[key2]*(2.0/3.0)
     else:
-        print('Error, isospin_sym = False not implemented, terminating the program.')
-        sys.exit()
+        m_t = 0
+        # np element
+        key = (n,l,n_p,l_p,s,j,m_t)
+        el = pot_dict[key]
     return el
 
 def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
@@ -186,6 +188,7 @@ def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
     #
     # I think that these corrections are OK, but I cannot guarantee that the 
     # code must not be changed at other paces too.
+    #fac = np.real((1j)**(+bra['l']-ket['l']))
     el = get_two_body_HO_potential_el(bra['n'],bra['l'],ket['n'],ket['l']
             ,bra['s'],bra['j'],bra['t'],pot_dict,isospin_sym)
     return el
