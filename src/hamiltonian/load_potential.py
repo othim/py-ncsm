@@ -7,6 +7,15 @@
 import numpy as np
 import time
 
+def get_data(file_name):
+    with open(file_name, 'r') as f:                                                  
+        for index, line in enumerate(f):                                        
+            # search string                                                     
+            if 'DATA:' in line:  
+                # Load potential into array
+                pot = np.loadtxt(file_name,skiprows=index+1)
+                return pot
+
 
 def load_potential_file(file_name):
     '''
@@ -27,10 +36,10 @@ def load_potential_file(file_name):
             Dictionary with the quantum numbers as a tuple as key for
             each potential ME.
     '''
-
-    # Load potential into array
+    #pot = get_data(file_name)
     pot = np.loadtxt(file_name)
-
+    #for row in pot:
+    #    print(row)
     # Convert to dictionary with tuple of quantum numbers as
     # key to enable O(1) lookup time for matrix elements.
     data_dict = {tuple(row[:7].astype(int)): row[7] for row in pot}
