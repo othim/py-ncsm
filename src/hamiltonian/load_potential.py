@@ -36,8 +36,8 @@ def load_potential_file(file_name):
             Dictionary with the quantum numbers as a tuple as key for
             each potential ME.
     '''
-    #pot = get_data(file_name)
-    pot = np.loadtxt(file_name)
+    pot = get_data(file_name)
+    #pot = np.loadtxt(file_name)
     #for row in pot:
     #    print(row)
     # Convert to dictionary with tuple of quantum numbers as
