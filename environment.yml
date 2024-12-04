@@ -9,6 +9,3 @@ dependencies:
 - gitpython
 - mkl-service
 - charset_normalizer
-pip:
-- ctypes
-- pywigxjpf
