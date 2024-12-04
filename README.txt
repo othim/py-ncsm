@@ -1,13 +1,13 @@
 # Brief description
 
 py-ncsm is a simple NCSM code for solving the A=3 nucleon system written
-in python. The code is not optimized, or very flexible but written in an 
+in python. The code is not optimized, or very flexible --- but written in an 
 understandable manner. This code is the result of the author reading 
-a PhD course in Computational Nuclear Physics at Chalmers 2024. 
+a PhD course in Computational Nuclear Physics at Chalmers 2024.
 
 The code is currently set up only to solve the ^3H system using an effective 
-isoscalar approximation. Note that the code is used at your own risk since the 
-author cannot guarantee that there are bugs in the code. If you find a bug, or 
+isoscalar approximation. Note that the code is used at your own risk and there
+can be bugs in the code. If you find a bug, or 
 have suggestions for improvement please contact the author, or make a github 
 issue.
 
@@ -86,7 +86,7 @@ v1.0 Autumn 2024
   [settings]
   nmax_arr         = [0,2,4,10,20]
   hbar_omega       = 24    # hbar_omega in MeV.
-  isospin_sym      = True  
+  isospin_sym      = False
   fast_comp        = False # Not implemented
   dim_lanczos      = 2000
   interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
