@@ -80,9 +80,9 @@ v1.0 Autumn 2024
 
   An input file is provided by running:
 
-  $ python run-py-nscm.py example_input_file_1.txt
+  $ python run-py-nscm.py example_inout_files/in_small.txt
 
-  ----------------------------- input_file.txt --------------------------------
+  ------------------------------- in_small.txt --------------------------------
   [settings]
   nmax_arr         = [0,2,4,10,20]
   hbar_omega       = 24    # hbar_omega in MeV.
@@ -91,14 +91,14 @@ v1.0 Autumn 2024
   dim_lanczos      = 2000
   interaction_file = interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt
   output_file      = example-inout-files/out_small.txt
-  ------------------------- END input_file.txt --------------------------------
+  --------------------------- END in_small.txt --------------------------------
 
 
   This will generate the corresponding output file <outdir>/<out_file_name>.
 
 - The output file has the following general structure:
 
-  ----------------------------- output_file.txt -------------------------------
+  ----------------------------- out_small.txt -------------------------------
   <version_of_this_code>
   infile=<input_file_name>
   <copy_of_input_parameters>
@@ -107,14 +107,14 @@ v1.0 Autumn 2024
   -----------------------------------------------------------------------------
                                   *** OUTPUT ***
   -----------------------------------------------------------------------------
-  Nmax  E          dim (Gamma)  dim (alpha)  Comp. H (ms)  Diag. H (ms)  method
-  0     12.16523   1            2            0             0             exact   
-  2     4.88032    5            14           1             0             exact   
-  4     1.82073    15           44           3             0             exact   
-  10    -5.05301   108          322          131           1             exact   
-  20    -7.77277   632          1892         4411          29            exact   
+  Nmax  E                    dim (Gamma)  dim (alpha)  Comp. H (ms)  Diag. H (ms)  method
+  0     12.1652310190506654  1            2            0             0             exact   
+  2     4.8803190292006242   5            14           1             0             exact   
+  4     1.8207328044041804   15           44           3             0             exact   
+  10    -5.0530076036149802  108          322          135           1             exact   
+  20    -7.7727667430020322  632          1892         4385          26            exact   
 
-  ------------------------- END output_file.txt -------------------------------
+  --------------------------- END out_small.txt -------------------------------
 - The format needed in the interaction files is described in the README file 
   in the directory 'interactions/'.
 
