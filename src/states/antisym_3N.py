@@ -8,7 +8,8 @@
 
     This file requires the module f2py-created module 'gmosh'. 
 
-    Oliver Thim (2024)
+    Oliver Thim,
+    Chalmers (2024)
 '''
 import numpy as np
 import pywigxjpf as wig

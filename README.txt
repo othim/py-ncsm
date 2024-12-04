@@ -24,13 +24,19 @@ v1.0 Autumn 2024
 
 ## Important things to note about the code:
 
-- This code is primarily written to consider the triton (^3H) in the limit of
-  isospin symmetry. This is reminded through the flag:
+- This code is primarily written to consider the triton (^3H). If 
+
+  isospin_sym = False
+
+  the function get_two_body_HO_potential_el(...) in setup_Hamiltonian.py
+  will average the np and nn potentials as it should be treated in the
+  triton. If
 
   isospin_sym = True
 
-  If isospin_sym is set to false, the code will terminate since that is 
-  not implemented.
+  the function get_two_body_HO_potential_el(...) will just take the np 
+  potential element.
+
 
 ## External dependencies:
 

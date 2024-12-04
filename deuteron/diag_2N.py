@@ -13,8 +13,10 @@ from itertools import groupby
 from operator import itemgetter
 
 # Append the path to py-ncsm
-sys.path.append(os.path.abspath('../src/states/'))
-sys.path.append(os.path.abspath('../src/hamiltonian/'))
+dir_file   = os.path.dirname(os.path.realpath(__file__))
+dir_parent = os.path.dirname(dir_file)
+sys.path.append(os.path.abspath(dir_parent+'/src/hamiltonian'))
+sys.path.append(os.path.abspath(dir_parent+'/src/states'))
 import setup_Hamiltonian as sH
 import basis_states as bs
 import load_potential as lp

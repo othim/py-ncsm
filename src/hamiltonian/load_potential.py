@@ -2,7 +2,7 @@
     This file contains function to load potential matrix elements from files.
 
     Oliver Thim,
-    Chalmers, 2024
+    Chalmers (2024)
 '''
 import numpy as np
 import time

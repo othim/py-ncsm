@@ -1,10 +1,10 @@
 '''
     run-py-ncsm.py
     --------------
-    
-    TODO:
+    - Main script to run the code, see README.txt
 
-    - Implement the general expressions for the isospin avg
+    Oliver Thim,
+    Chalmers (2024)
 '''
 # Import packages
 import os
@@ -16,16 +16,13 @@ import json
 import time
 import git # Can be removed, just to print version for extra control
 
-# Import py-ncsm-file
-os.sys.path.append("src/states/")
-os.sys.path.append("src/hamiltonian/")
+# Append the path to py-ncsm
+dir_path   = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path + '/src/states/')
+sys.path.append(dir_path + '/src/hamiltonian/')
+import load_potential as lp
+import setup_Hamiltonian as sh
 
-os.sys.path.append("/Users/toliver/Documents/phd/courses/py-ncsm/src/states/")
-os.sys.path.append("/Users/toliver/Documents/phd/courses/py-ncsm/src/hamiltonian/")
-from src.hamiltonian import load_potential as lp
-from src.hamiltonian import setup_Hamiltonian as sh
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # *****************************************************************************
 # ************************** DEFINE DEFAULT ARGUMENTS *************************

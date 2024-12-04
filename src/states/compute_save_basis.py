@@ -6,7 +6,8 @@
     NOTE that you might need to change som settings of the code in the 
     VARIABLES section.
 
-    Oliver Thim (2024)
+    Oliver Thim,
+    Chalmers (2024)
 '''
 import numpy as np
 import pywigxjpf as wig

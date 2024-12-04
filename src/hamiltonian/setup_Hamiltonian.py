@@ -4,7 +4,11 @@
     
     This file contains some methods to construct Hamiltonian matrix.
 
-    Oliver Thim (2024)
+    Oliver Thim,
+    Chalmers (2024)
+
+    TODO:
+    - Implement the general expressions for the isospin avg
 '''
 
 import numpy as np
@@ -128,7 +132,9 @@ def get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega):
 def get_two_body_HO_potential_el(n,l,n_p,l_p,s,j,t,pot_dict,isospin_sym):
     el = 0
     if not isospin_sym:
+        #
         # NOTE: This implementation is specifically for ^3H!!
+        #
         if (t==0):
             m_t = 0
             # np element

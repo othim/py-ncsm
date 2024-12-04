@@ -5,7 +5,8 @@
     This file contains some methods to construct and manipulate
     Harmonic Oscillator (HO) states.
 
-    Oliver Thim (2024)
+    Oliver Thim,
+    Chalmers, (2024)
 '''
 import time
 from itertools import groupby
