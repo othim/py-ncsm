@@ -42,7 +42,7 @@ v1.0 Autumn 2024
 
 - FORTRAN code for computing Moshinsky brackets.
 
-- Code to compute Wigner symbols: wigxjpf (installable via pip)
+- Code to compute Wigner symbols: pywigxjpf (installable via pip)
 
 # Installing and running the code:
 
