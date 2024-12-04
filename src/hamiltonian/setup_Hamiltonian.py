@@ -14,7 +14,7 @@ import time
 import load_potential as lp
 import copy
 
-def get_T_me_alpha_basis(bra,ket,Omega,mN):
+def get_T_me_alpha_basis(bra,ket,Omega):
     '''
         Computes the matrix element of the kinetic energy
         <bra|T_{12}|ket> = <n cN \alpha | T_{12} | n' cN' \alpha'>. 
@@ -30,7 +30,6 @@ def get_T_me_alpha_basis(bra,ket,Omega,mN):
             ket (basis_state) : basis state as computed with 
                                 basis_states.NN_basis_nl()
             Omega (float)     : HO frquency (MeV).
-            mN (float)        : nucleon mass (MeV).
         Returns:
             <bra|T_{12}|ket> (float) : Kinetic energy ME in the HO basis (MeV).
     '''
@@ -80,7 +79,7 @@ def get_T_me_alpha_basis(bra,ket,Omega,mN):
 
 
 
-def get_V_HO_alpha_basis(bra,ket,Omega,mN):
+def get_V_HO_alpha_basis(bra,ket,Omega):
     '''
         Computes matrix elements of the Harmonic Oscillator. This function
         can be used as a test to see that the HO eigenvalues for the 2N system 
@@ -113,12 +112,12 @@ def get_V_HO_alpha_basis(bra,ket,Omega,mN):
     return matrix_el*Omega/2
     
 
-def get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega,mN):
+def get_V_HO_matrix_alpha_basis(alpha_basis_list,Omega):
     
     T_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
     for i,bra in enumerate(alpha_basis_list):
         for j,ket in enumerate(alpha_basis_list):
-            el = get_V_HO_alpha_basis(bra,ket,Omega,mN)
+            el = get_V_HO_alpha_basis(bra,ket,Omega)
             T_matrix[i,j] = el
     print(T_matrix.shape)
     return T_matrix
@@ -148,7 +147,7 @@ def get_two_body_HO_potential_el(n,l,n_p,l_p,s,j,t,pot_dict,isospin_sym):
         el = pot_dict[key]
     return el
 
-def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
+def get_V_me_alpha_basis(bra,ket,Omega,pot_dict,isospin_sym):
     '''
         Computes the potential matrix element in the alpha basis.
     '''
@@ -195,7 +194,7 @@ def get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym):
 
 
 
-def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast):
+def get_V_matrix_alpha_basis(alpha_basis_list,Omega,pot_dict,isospin_sym,fast):
     ''' 
         Construct the potential matrix from the potential elements.
     '''
@@ -204,25 +203,25 @@ def get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast
     V_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
     for i,bra in enumerate(alpha_basis_list):
         for j,ket in enumerate(alpha_basis_list):
-            el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
+            el = get_V_me_alpha_basis(bra,ket,Omega,pot_dict,isospin_sym)
             V_matrix[i,j] = el
     '''
     if fast:
         for i,bra in enumerate(alpha_basis_list):
             for j,ket in enumerate(alpha_basis_list):
                 if (j<i) : continue
-                el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
+                el = get_V_me_alpha_basis(bra,ket,Omega,pot_dict,isospin_sym)
                 V_matrix[i,j] = el
                 V_matrix[j,i] = np.conj(el)
     else:
         for i,bra in enumerate(alpha_basis_list):
             for j,ket in enumerate(alpha_basis_list):
-                el = get_V_me_alpha_basis(bra,ket,Omega,mN,pot_dict,isospin_sym)
+                el = get_V_me_alpha_basis(bra,ket,Omega,pot_dict,isospin_sym)
                 V_matrix[i,j] = el
     '''
     return V_matrix
 
-def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
+def get_T_matrix_alpha_basis(alpha_basis_list,Omega,fast):
     '''
         Construct the kinetic energy matrix from the kinetic energy elements.
     '''
@@ -230,7 +229,7 @@ def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
     T_matrix = np.zeros((len(alpha_basis_list),len(alpha_basis_list)))
     for i,bra in enumerate(alpha_basis_list):
         for j,ket in enumerate(alpha_basis_list):
-            el = get_T_me_alpha_basis(bra,ket,Omega,mN)
+            el = get_T_me_alpha_basis(bra,ket,Omega)
             T_matrix[i,j] = el
     '''
     # If fast=True, use that V^\dagger = V and only compute half of the elements
@@ -238,27 +237,27 @@ def get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast):
         for i,bra in enumerate(alpha_basis_list):
             for j,ket in enumerate(alpha_basis_list):
                 if (j<i) : continue
-                el = get_T_me_alpha_basis(bra,ket,Omega,mN)
+                el = get_T_me_alpha_basis(bra,ket,Omega)
                 T_matrix[i,j] = el
                 T_matrix[j,i] = np.conj(el)
     else:
         for i,bra in enumerate(alpha_basis_list):
             for j,ket in enumerate(alpha_basis_list):
-                el = get_T_me_alpha_basis(bra,ket,Omega,mN)
+                el = get_T_me_alpha_basis(bra,ket,Omega)
                 T_matrix[i,j] = el
     '''
     return T_matrix
 
-def setup_H_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,isospin_sym,fast):
+def setup_H_alpha_basis(alpha_basis_list,Omega,pot_dict,isospin_sym,fast):
     '''
        Construct the Hamiltonian matrix H = T+V in the alpha basis.
     '''
     
     # Compute kinetic energy operator
-    T_alpha_basis = get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast)
+    T_alpha_basis = get_T_matrix_alpha_basis(alpha_basis_list,Omega,fast)
     
     # Compute potential operator
-    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,\
+    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,pot_dict,\
             isospin_sym,fast)
     return T_alpha_basis + V_alpha_basis
 
@@ -271,14 +270,14 @@ def alpha_to_Gamma_basis(Gamma_to_alpha_matrix,M_alpha_basis):
     
 
 def setup_H_Gamma_basis(Gamma_to_alpha_matrix,alpha_basis_list,Gamma_basis_list,\
-        Omega,mN,pot_dict,isospin_sym,fast):
+        Omega,pot_dict,isospin_sym,fast):
     
     # Compute kinetic energy operator.
-    T_alpha_basis = 3*get_T_matrix_alpha_basis(alpha_basis_list,Omega,mN,fast)
+    T_alpha_basis = 3*get_T_matrix_alpha_basis(alpha_basis_list,Omega,fast)
     T_Gamma_basis = alpha_to_Gamma_basis(Gamma_to_alpha_matrix,T_alpha_basis)
     
     # Compute potential operator
-    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,mN,pot_dict,\
+    V_alpha_basis = get_V_matrix_alpha_basis(alpha_basis_list,Omega,pot_dict,\
             isospin_sym,fast)
     V_Gamma_basis = 3*alpha_to_Gamma_basis(Gamma_to_alpha_matrix,V_alpha_basis)
     
@@ -289,7 +288,6 @@ def setup_H_Gamma_basis(Gamma_to_alpha_matrix,alpha_basis_list,Gamma_basis_list,
 if __name__=="__main__":
     # Set varibles
     Omega = 24   # MeV
-    mN    = 938  # MeV
     isospin_sym = True
     #interaction_file="../../interactions/vn3lo500_nmax30_jrelmax10_hw24.dat"
     #interaction_file="../../interactions/nmax8_halfmn.txt"
@@ -343,7 +341,7 @@ if __name__=="__main__":
         print(f'Setting up Hamiltonian...')
         start = time.time()
         H_matrix_Gamma_basis = setup_H_Gamma_basis(Gamma_to_alpha,\
-                alpha_basis_list,Gamma_basis_list,Omega,mN,pot_dict,isospin_sym)
+                alpha_basis_list,Gamma_basis_list,Omega,pot_dict,isospin_sym)
         print(H_matrix_Gamma_basis.shape)
         end = time.time()
         print(f'Done! Time={(end-start)*1000:.0f} ms')

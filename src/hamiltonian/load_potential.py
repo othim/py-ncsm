@@ -1,8 +1,8 @@
 '''
-    load_potential.py
-    -----------------
-
     This file contains function to load potential matrix elements from files.
+
+    Oliver Thim,
+    Chalmers, 2024
 '''
 import numpy as np
 import time
@@ -22,8 +22,9 @@ def load_potential_file(file_name):
         Loads a potential file containing matrix elements (ME).
 
         The file is assumed to have the form:
-        
+        <meta_data>
         n   l   np  lp  s   j   mt  ME   
+        DATA:
         0   0   0   0   0   0   -1  -7.966724483064686                           
         0   0   1   0   0   0   -1  -2.652044568838252                           
         0   0   2   0   0   0   -1  2.89434840507413                             
@@ -36,6 +37,7 @@ def load_potential_file(file_name):
             Dictionary with the quantum numbers as a tuple as key for
             each potential ME.
     '''
+    #print(file_name)
     pot = get_data(file_name)
     #pot = np.loadtxt(file_name)
     #for row in pot:

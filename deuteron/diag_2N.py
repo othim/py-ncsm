@@ -1,15 +1,20 @@
 '''
     Script to setup the 2N system and diagonalize the Hamiltonian
-    in a specific partiel wave.
+    in a specific (j,t,pi) channel.
+
+    Oliver Thim, 
+    Chalmers 2024
 '''
 
 import numpy as np
 import os
+import sys
 from itertools import groupby
 from operator import itemgetter
 
-os.sys.path.append("../src/states/")
-os.sys.path.append("../src/hamiltonian/")
+# Append the path to py-ncsm
+sys.path.append(os.path.abspath('../src/states/'))
+sys.path.append(os.path.abspath('../src/hamiltonian/'))
 import setup_Hamiltonian as sH
 import basis_states as bs
 import load_potential as lp
@@ -41,8 +46,8 @@ def diag_2N(Nmax,hw,isospin_sym,fast,j,t,pi,interaction_file,PRINT=True):
     # Select only deuteron channel
     grouper = itemgetter("j","t", "pi") 
     JTpi_list, key_list = bs.group_NNN_basis_nl(grouper, alpha_2N, verbose=False)
-    if PRINT:
-        print([(j,t,pi) == a for a in key_list])
+    #if PRINT:
+    #    print([(j,t,pi) == a for a in key_list])
 
     # Take the group with correct quantum numbers
     idx = [(j,t,pi) == a for a in key_list].index(True)
@@ -57,8 +62,7 @@ def diag_2N(Nmax,hw,isospin_sym,fast,j,t,pi,interaction_file,PRINT=True):
             print(s)
 
     # Setup Hamiltonian and diagonalize
-    mN = 0
-    H_matrix_Gamma_basis = sH.setup_H_alpha_basis(JTpi_block,hw,mN,pot_dict,\
+    H_matrix_Gamma_basis = sH.setup_H_alpha_basis(JTpi_block,hw,pot_dict,\
             isospin_sym,fast)
     return np.linalg.eigh(H_matrix_Gamma_basis)
 
@@ -67,7 +71,6 @@ def diag_2N(Nmax,hw,isospin_sym,fast,j,t,pi,interaction_file,PRINT=True):
 if __name__=='__main__':
 
     interaction_file = "../interactions/idaho_n3lo_nmax_40_hw_24_Np_80_finite.txt"
-    #interaction_file = "/Users/toliver/Documents/phd/projects/bayes_dwb/benchmark/output/LO_WPC_sep_hw_24.txt"
     Nmax_arr         = [0,2,4,6,8,10,12,14,16,20,24,28,32,36,40]
     hw               = 24   # MeV
     isospin_sym      = True
