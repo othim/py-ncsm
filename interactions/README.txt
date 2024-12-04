@@ -1,6 +1,9 @@
 The format of the interaction files is:
 
+-------------------------------------------------------------------------------
+<meta_data>
 n   l   np  lp  s   j   mt  ME
+DATA:
 0	0	0	0	0	0	-1	-7.651247774229011
 0	0	1	0	0	0	-1	-3.234632983474619
 0	0	2	0	0	0	-1	1.472983482380104
@@ -8,9 +11,7 @@ n   l   np  lp  s   j   mt  ME
 0	0	4	0	0	0	-1	9.453923188728981
 0	0	5	0	0	0	-1	11.80509728323482
 ...
-
-- The first line should not arrear in the file. See, the example interaction 
-  files.
+-------------------------------------------------------------------------------
 
 - The interaction matric element is defined as 
   
